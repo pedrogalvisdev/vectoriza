@@ -502,3 +502,33 @@
         flex-direction: column;
     }
 }
+
+/* Detalle de resultados por tema */
+.progress-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.progress-detail-item {
+    padding: 20px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.progress-detail-item h3 {
+    margin: 0 0 10px;
+    color: var(--blue);
+}
+
+.progress-detail-item p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.progress-details-section {
+    margin-top: 28px;
+}
