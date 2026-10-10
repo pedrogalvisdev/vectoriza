@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-links a');
-    const topicStatus = document.querySelectorAll('.topic-status');
+    const topicStatus = document.querySelectorAll('.topic-status:not(.topic-link)');
 
     // Actualizar el enlace activo del menú.
     navLinks.forEach((link) => {

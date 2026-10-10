@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curvas de nivel | Vectoriza</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+    <script src="js/curvas.js" defer></script>
+</head>
+<body>
+    <header class="navbar">
+        <a class="logo" href="index.html">Vectoriza</a>
+        <nav class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="cuadricas.html">Cuádricas</a>
+            <a href="conicas.html">Cónicas</a>
+            <a class="active" href="curvas.html">Curvas de nivel</a>
+            <a href="progreso.html">Mi progreso</a>
+        </nav>
+    </header>
+
+    <main class="lesson-container">
+        <section class="lesson-hero">
+            <span class="eyebrow">APRENDER · TEMA 3</span>
+            <h1>Curvas de nivel</h1>
+            <p>Aprende a representar funciones de dos variables mediante curvas en el plano.</p>
+        </section>
+
+        <section class="lesson-block">
+            <h2>1. ¿Qué es una curva de nivel?</h2>
+            <p>Una función de dos variables tiene la forma <strong>f(x,y)</strong>. Para obtener una curva de nivel, igualamos la función a una constante <strong>k</strong>:</p>
+            <div class="formula">f(x, y) = k</div>
+            <p>Al cambiar el valor de k, obtenemos diferentes curvas. Cada una representa los puntos del plano donde la función tiene el mismo valor.</p>
+        </section>
+
+        <section class="lesson-block">
+            <h2>2. Ejemplo paso a paso</h2>
+            <p>Encuentra la curva de nivel de la función:</p>
+            <div class="formula">f(x, y) = x² + y²</div>
+            <p><strong>Paso 1.</strong> Elegimos el nivel k = 4 y lo igualamos a la función.</p>
+            <div class="formula">x² + y² = 4</div>
+            <p><strong>Paso 2.</strong> Identificamos la ecuación. Corresponde a una circunferencia con centro en (0, 0) y radio 2.</p>
+            <p><strong>Paso 3.</strong> Comprobamos algunos puntos:</p>
+            <ul>
+                <li>(2, 0): 2² + 0² = 4.</li>
+                <li>(0, 2): 0² + 2² = 4.</li>
+                <li>(-2, 0): (-2)² + 0² = 4.</li>
+                <li>(0, -2): 0² + (-2)² = 4.</li>
+            </ul>
+            <div class="worked-example">
+                <strong>Conclusión:</strong> los cuatro puntos cumplen la ecuación y pertenecen a la circunferencia de radio 2.
+            </div>
+        </section>
+
+        <section class="lesson-block">
+            <h2>3. Practica lo aprendido</h2>
+            <p>Para la función f(x,y) = x² + y², ¿cuál es la curva de nivel cuando k = 9?</p>
+
+            <div class="quiz-card" id="level-quiz">
+                <button type="button" class="quiz-option" data-answer="a">A. x + y = 9</button>
+                <button type="button" class="quiz-option" data-answer="b">B. x² + y² = 9</button>
+                <button type="button" class="quiz-option" data-answer="c">C. x² - y² = 9</button>
+                <button type="button" class="quiz-option" data-answer="d">D. x² + y² = 3</button>
+
+                <p class="quiz-feedback" id="level-feedback" aria-live="polite">Selecciona una respuesta y comprueba.</p>
+
+                <div class="quiz-actions">
+                    <button class="button" type="button" id="level-check">Comprobar respuesta</button>
+                    <button class="button button-secondary" type="button" id="level-reset">Intentar de nuevo</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-finish">
+            <h2>¡Buen trabajo!</h2>
+            <p>Ya conoces el procedimiento básico: igualar la función a k, identificar la ecuación resultante y comprobar puntos.</p>
+            <a class="button" href="progreso.html">Ver mi progreso</a>
+            <a class="button button-secondary" href="index.html">Volver al inicio</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Vectoriza · Aprende Cálculo Vectorial paso a paso</p>
+    </footer>
+</body>
+</html>
