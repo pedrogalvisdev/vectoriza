@@ -1,182 +1,255 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.nav-links a');
-    const topicStatus = document.querySelectorAll('.topic-status:not(.topic-link)');
 
-    // Actualizar el enlace activo del menú.
-    navLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-            navLinks.forEach((item) => item.classList.remove('active'));
-            link.classList.add('active');
-        });
+document.addEventListener("DOMContentLoaded", () => {
+    configurarNavegacion();
+    configurarEstadosTemas();
+    configurarDesplazamiento();
+    configurarCuestionarioCuadricas();
+});
+
+/* =========================================
+   1. NAVEGACIÓN
+========================================= */
+
+function configurarNavegacion() {
+    const paginaActual = window.location.pathname
+        .split("/")
+        .pop() || "index.html";
+
+    document.querySelectorAll(".nav-link").forEach((enlace) => {
+        const destino = enlace.getAttribute("href");
+
+        if (!destino || destino.startsWith("#")) {
+            return;
+        }
+
+        const archivoDestino = destino.split("/").pop();
+
+        if (archivoDestino === paginaActual) {
+            enlace.classList.add("active");
+            enlace.setAttribute("aria-current", "page");
+        } else {
+            enlace.classList.remove("active");
+            enlace.removeAttribute("aria-current");
+        }
     });
+}
 
-    // Informar al estudiante cuando un tema aún está en desarrollo.
-    topicStatus.forEach((status) => {
-        status.textContent = 'Próximamente';
-        status.setAttribute('aria-label', 'Tema en construcción');
+/* =========================================
+   2. ESTADOS DE LOS TEMAS
+========================================= */
+
+function configurarEstadosTemas() {
+    document.querySelectorAll(".topic-status").forEach((elemento) => {
+        // Los enlaces disponibles conservan su estado.
+        if (elemento.closest("a") || elemento.classList.contains("topic-link")) {
+            return;
+        }
+
+        if (!elemento.textContent.trim()) {
+            elemento.textContent = "Próximamente";
+        }
     });
+}
 
-    // Mensaje temporal para las tarjetas que aún no tienen contenido.
-    document.querySelectorAll('.feature-card > a').forEach((link) => {
-        link.addEventListener('click', (event) => {
-            const destination = link.getAttribute('href');
+/* =========================================
+   3. DESPLAZAMIENTO SUAVE
+========================================= */
 
-            if (destination === '#temas') {
-                event.preventDefault();
-                document.querySelector('#temas').scrollIntoView({
-                    behavior: 'smooth'
+function configurarDesplazamiento() {
+    document.querySelectorAll('a[href^="#"]').forEach((enlace) => {
+        enlace.addEventListener("click", (evento) => {
+            const destino = enlace.getAttribute("href");
+
+            if (!destino || destino === "#") {
+                return;
+            }
+
+            const seccion = document.querySelector(destino);
+
+            if (seccion) {
+                evento.preventDefault();
+
+                seccion.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
                 });
             }
         });
     });
+}
 
-    console.log('Vectoriza se ha cargado correctamente.');
-});
+/* =========================================
+   4. PROGRESO DE CUÁDRICAS
+========================================= */
 
-// Interacciones de la lección de superficies cuádricas.
-document.addEventListener('DOMContentLoaded', () => {
-    const quiz = document.querySelector('#quiz');
+const CLAVE_PROGRESO_CUADRICAS = "vectorizaProgress";
 
-    if (!quiz) return;
+function obtenerProgresoCuadricas() {
+    try {
+        const datos = localStorage.getItem(CLAVE_PROGRESO_CUADRICAS);
 
-    const options = quiz.querySelectorAll('.quiz-option');
-    const feedback = quiz.querySelector('#quiz-feedback');
-    const checkButton = quiz.querySelector('#check-answer');
-    const resetButton = quiz.querySelector('#reset-quiz');
+        if (!datos) {
+            return {
+                attempts: 0,
+                correctAnswers: 0,
+                completedLessons: []
+            };
+        }
 
-    let selectedAnswer = null;
-    let answered = false;
+        const progreso = JSON.parse(datos);
 
-    options.forEach((option) => {
-        option.addEventListener('click', () => {
-            if (answered) return;
+        return {
+            attempts: Number(progreso.attempts) || 0,
+            correctAnswers: Number(progreso.correctAnswers) || 0,
+            completedLessons: Array.isArray(progreso.completedLessons)
+                ? progreso.completedLessons
+                : []
+        };
+    } catch (error) {
+        console.error("No se pudo leer el progreso de Vectoriza:", error);
 
-            selectedAnswer = option.dataset.answer;
+        return {
+            attempts: 0,
+            correctAnswers: 0,
+            completedLessons: []
+        };
+    }
+}
 
-            options.forEach((item) => {
-                item.classList.remove('selected');
-            });
+function guardarProgresoCuadricas(esCorrecta) {
+    try {
+        const progreso = obtenerProgresoCuadricas();
 
-            option.classList.add('selected');
-            feedback.textContent = 'Respuesta seleccionada. Pulsa "Comprobar respuesta".';
-            feedback.className = 'quiz-feedback';
-        });
-    });
+        progreso.attempts += 1;
 
-    checkButton.addEventListener('click', () => {
-        if (!selectedAnswer) {
-            feedback.textContent = 'Primero selecciona una respuesta.';
-            feedback.className = 'quiz-feedback error';
+        if (esCorrecta) {
+            progreso.correctAnswers += 1;
+
+            if (!progreso.completedLessons.includes("cuadricas")) {
+                progreso.completedLessons.push("cuadricas");
+            }
+        }
+
+        localStorage.setItem(
+            CLAVE_PROGRESO_CUADRICAS,
+            JSON.stringify(progreso)
+        );
+    } catch (error) {
+        console.error("No se pudo guardar el progreso de Vectoriza:", error);
+    }
+}
+
+/* =========================================
+   5. CUESTIONARIO DE CUÁDRICAS
+========================================= */
+
+function configurarCuestionarioCuadricas() {
+    const formulario = document.getElementById("quiz");
+
+    if (!formulario) {
+        return;
+    }
+
+    const botonComprobar = formulario.querySelector(
+        'button[type="submit"], input[type="submit"]'
+    );
+
+    const botonReiniciar = formulario.querySelector(
+        '[data-action="reset"], .reset-btn, .quiz-reset'
+    );
+
+    const respuestaCorrecta = "b";
+
+    let respondido = false;
+
+    formulario.addEventListener("submit", (evento) => {
+        evento.preventDefault();
+
+        if (respondido) {
             return;
         }
 
-        answered = true;
+        const seleccionada = formulario.querySelector(
+            'input[name="answer"]:checked, ' +
+            'input[name="respuesta"]:checked, ' +
+            'input[name="quiz"]:checked'
+        );
 
-        const correct = selectedAnswer === 'b';
+        const feedback = formulario.querySelector(
+            "#feedback, .quiz-feedback, .feedback"
+        );
 
-        options.forEach((option) => {
-            option.disabled = true;
-
-            if (option.dataset.answer === 'b') {
-                option.classList.add('correct');
-            } else if (option.dataset.answer === selectedAnswer && !correct) {
-                option.classList.add('incorrect');
+        if (!seleccionada) {
+            if (feedback) {
+                feedback.textContent = "Selecciona una respuesta antes de comprobar.";
+                feedback.className = "quiz-feedback incorrect";
+                feedback.setAttribute("role", "alert");
             }
+
+            return;
+        }
+
+        const esCorrecta =
+            seleccionada.value.trim().toLowerCase() === respuestaCorrecta;
+
+        guardarProgresoCuadricas(esCorrecta);
+
+        respondido = true;
+
+        if (feedback) {
+            feedback.textContent = esCorrecta
+                ? "¡Correcto! Muy bien, identificaste la superficie cuádrica."
+                : "No es correcto. Revisa el procedimiento e inténtalo de nuevo.";
+
+            feedback.className = esCorrecta
+                ? "quiz-feedback correct"
+                : "quiz-feedback incorrect";
+
+            feedback.setAttribute("role", "status");
+        }
+
+        formulario.querySelectorAll('input[type="radio"]').forEach((opcion) => {
+            opcion.disabled = true;
         });
 
-        if (correct) {
-            feedback.textContent =
-                '¡Correcto! Es un elipsoide: los tres términos cuadrados tienen coeficientes positivos y la suma es igual a 1.';
-            feedback.className = 'quiz-feedback success';
-        } else {
-            feedback.textContent =
-                'Todavía no. La respuesta correcta es B, un elipsoide. Observa que los tres términos cuadrados son positivos y su suma es igual a 1.';
-            feedback.className = 'quiz-feedback error';
+        if (botonComprobar) {
+            botonComprobar.disabled = true;
+        }
+
+        if (botonReiniciar) {
+            botonReiniciar.hidden = false;
         }
     });
 
-    resetButton.addEventListener('click', () => {
-        selectedAnswer = null;
-        answered = false;
+    if (botonReiniciar) {
+        botonReiniciar.addEventListener("click", () => {
+            formulario.reset();
 
-        options.forEach((option) => {
-            option.disabled = false;
-            option.classList.remove('selected', 'correct', 'incorrect');
+            formulario.querySelectorAll('input[type="radio"]').forEach((opcion) => {
+                opcion.disabled = false;
+            });
+
+            if (feedbackDisponible(formulario)) {
+                const feedback = formulario.querySelector(
+                    "#feedback, .quiz-feedback, .feedback"
+                );
+
+                feedback.textContent = "";
+                feedback.className = "quiz-feedback";
+                feedback.removeAttribute("role");
+            }
+
+            if (botonComprobar) {
+                botonComprobar.disabled = false;
+            }
+
+            respondido = false;
         });
-
-        feedback.textContent = 'Elige una opción para comprobar tu respuesta.';
-        feedback.className = 'quiz-feedback';
-    });
-});
-
-// Registro local del progreso académico.
-document.addEventListener('DOMContentLoaded', () => {
-    const storageKey = 'vectorizaProgress';
-
-    function readProgress() {
-        try {
-            return JSON.parse(localStorage.getItem(storageKey)) || {
-                completedLessons: [],
-                attempts: 0,
-                correctAnswers: 0
-            };
-        } catch {
-            return {
-                completedLessons: [],
-                attempts: 0,
-                correctAnswers: 0
-            };
-        }
     }
+}
 
-    function saveProgress(progress) {
-        localStorage.setItem(storageKey, JSON.stringify(progress));
-    }
-
-    const quiz = document.querySelector('#quiz');
-
-    if (quiz) {
-        const checkButton = quiz.querySelector('#check-answer');
-        const options = quiz.querySelectorAll('.quiz-option');
-
-        checkButton.addEventListener('click', () => {
-            const selected = quiz.querySelector('.quiz-option.selected');
-
-            if (!selected || options[0].disabled) return;
-
-            const progress = readProgress();
-            progress.attempts += 1;
-
-            if (selected.dataset.answer === 'b') {
-                progress.correctAnswers += 1;
-            }
-
-            if (!progress.completedLessons.includes('cuadricas')) {
-                progress.completedLessons.push('cuadricas');
-            }
-
-            saveProgress(progress);
-        }, true);
-    }
-
-    // Mostrar las estadísticas en la página de progreso.
-    const completedCount = document.querySelector('#completed-count');
-
-    if (completedCount) {
-        const progress = readProgress();
-        const attempts = document.querySelector('#attempt-count');
-        const correct = document.querySelector('#correct-count');
-        const fill = document.querySelector('#lesson-progress-fill');
-        const text = document.querySelector('#lesson-progress-text');
-
-        completedCount.textContent = progress.completedLessons.length;
-        attempts.textContent = progress.attempts;
-        correct.textContent = progress.correctAnswers;
-
-        const completed = progress.completedLessons.includes('cuadricas');
-        fill.style.width = completed ? '100%' : '0%';
-        text.textContent = completed
-            ? 'Lección completada: ya respondiste el cuestionario al menos una vez.'
-            : 'Todavía no has completado esta lección.';
-    }
-});
+function feedbackDisponible(formulario) {
+    return Boolean(
+        formulario.querySelector("#feedback, .quiz-feedback, .feedback")
+    );
+}

@@ -1,87 +1,143 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const quiz = document.querySelector('#conic-quiz');
-    if (!quiz) return;
 
-    const options = quiz.querySelectorAll('.quiz-option');
-    const feedback = quiz.querySelector('#conic-feedback');
-    const check = quiz.querySelector('#conic-check');
-    const reset = quiz.querySelector('#conic-reset');
+document.addEventListener("DOMContentLoaded", () => {
+    configurarCuestionarioConicas();
+});
 
-    let selected = null;
-    let answered = false;
+const CLAVE_PROGRESO_CONICAS = "vectorizaConicasProgress";
 
-    options.forEach((option) => {
-        option.addEventListener('click', () => {
-            if (answered) return;
+function obtenerProgresoConicas() {
+    try {
+        const datos = localStorage.getItem(CLAVE_PROGRESO_CONICAS);
+        const progreso = datos ? JSON.parse(datos) : {};
 
-            selected = option.dataset.answer;
+        return {
+            attempts: Number(progreso.attempts) || 0,
+            correctAnswers: Number(progreso.correctAnswers) || 0
+        };
+    } catch (error) {
+        console.error("Error al leer el progreso de cónicas:", error);
 
-            options.forEach((item) => item.classList.remove('selected'));
-            option.classList.add('selected');
+        return {
+            attempts: 0,
+            correctAnswers: 0
+        };
+    }
+}
 
-            feedback.textContent = 'Respuesta seleccionada. Ahora comprueba tu resultado.';
-            feedback.className = 'quiz-feedback';
-        });
-    });
+function guardarProgresoConicas(esCorrecta) {
+    try {
+        const progreso = obtenerProgresoConicas();
 
-    check.addEventListener('click', () => {
-        if (answered) return;
+        progreso.attempts += 1;
 
-        if (!selected) {
-            feedback.textContent = 'Selecciona una respuesta primero.';
-            feedback.className = 'quiz-feedback error';
+        if (esCorrecta) {
+            progreso.correctAnswers += 1;
+        }
+
+        localStorage.setItem(
+            CLAVE_PROGRESO_CONICAS,
+            JSON.stringify(progreso)
+        );
+    } catch (error) {
+        console.error("Error al guardar el progreso de cónicas:", error);
+    }
+}
+
+function configurarCuestionarioConicas() {
+    const formulario = document.getElementById("conic-quiz");
+
+    if (!formulario) {
+        return;
+    }
+
+    const respuestaCorrecta = "b";
+    const feedback = formulario.querySelector(
+        "#feedback, .quiz-feedback, .feedback"
+    );
+
+    const botonComprobar = formulario.querySelector(
+        'button[type="submit"], input[type="submit"]'
+    );
+
+    const botonReiniciar = formulario.querySelector(
+        '[data-action="reset"], .reset-btn, .quiz-reset'
+    );
+
+    let respondido = false;
+
+    formulario.addEventListener("submit", (evento) => {
+        evento.preventDefault();
+
+        if (respondido) {
             return;
         }
 
-        answered = true;
-        const correct = selected === 'b';
+        const seleccionada = formulario.querySelector(
+            'input[name="answer"]:checked, ' +
+            'input[name="respuesta"]:checked, ' +
+            'input[name="quiz"]:checked'
+        );
 
-        options.forEach((option) => {
-            option.disabled = true;
-
-            if (option.dataset.answer === 'b') {
-                option.classList.add('correct');
-            } else if (option.dataset.answer === selected) {
-                option.classList.add('incorrect');
+        if (!seleccionada) {
+            if (feedback) {
+                feedback.textContent = "Selecciona una respuesta antes de comprobar.";
+                feedback.className = "quiz-feedback incorrect";
+                feedback.setAttribute("role", "alert");
             }
-        });
 
-        if (correct) {
-            feedback.textContent =
-                '¡Correcto! La hipérbola tiene términos cuadrados con signos opuestos en su forma canónica.';
-            feedback.className = 'quiz-feedback success';
-        } else {
-            feedback.textContent =
-                'La respuesta correcta es B. La diferencia entre los términos cuadrados es una característica de la hipérbola en esta forma canónica.';
-            feedback.className = 'quiz-feedback error';
+            return;
         }
 
-        try {
-            const key = 'vectorizaConicasProgress';
-            const progress = JSON.parse(localStorage.getItem(key)) || {
-                attempts: 0,
-                correctAnswers: 0
-            };
+        const esCorrecta =
+            seleccionada.value.trim().toLowerCase() === respuestaCorrecta;
 
-            progress.attempts += 1;
-            if (correct) progress.correctAnswers += 1;
+        guardarProgresoConicas(esCorrecta);
+        respondido = true;
 
-            localStorage.setItem(key, JSON.stringify(progress));
-        } catch (error) {
-            console.warn('No fue posible guardar el progreso de cónicas.', error);
+        if (feedback) {
+            feedback.textContent = esCorrecta
+                ? "¡Correcto! Identificaste correctamente la cónica."
+                : "Respuesta incorrecta. Revisa las formas canónicas de las cónicas.";
+
+            feedback.className = esCorrecta
+                ? "quiz-feedback correct"
+                : "quiz-feedback incorrect";
+
+            feedback.setAttribute("role", "status");
+        }
+
+        formulario.querySelectorAll('input[type="radio"]').forEach((opcion) => {
+            opcion.disabled = true;
+        });
+
+        if (botonComprobar) {
+            botonComprobar.disabled = true;
+        }
+
+        if (botonReiniciar) {
+            botonReiniciar.hidden = false;
         }
     });
 
-    reset.addEventListener('click', () => {
-        selected = null;
-        answered = false;
+    if (botonReiniciar) {
+        botonReiniciar.addEventListener("click", () => {
+            formulario.reset();
 
-        options.forEach((option) => {
-            option.disabled = false;
-            option.classList.remove('selected', 'correct', 'incorrect');
+            formulario.querySelectorAll('input[type="radio"]').forEach((opcion) => {
+                opcion.disabled = false;
+            });
+
+            if (feedback) {
+                feedback.textContent = "";
+                feedback.className = "quiz-feedback";
+                feedback.removeAttribute("role");
+            }
+
+            if (botonComprobar) {
+                botonComprobar.disabled = false;
+            }
+
+            respondido = false;
         });
-
-        feedback.textContent = 'Selecciona una respuesta.';
-        feedback.className = 'quiz-feedback';
-    });
-});
+    }
+}
