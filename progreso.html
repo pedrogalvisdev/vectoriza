@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Consulta tu avance en Vectoriza.">
+    <title>Mi progreso | Vectoriza</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">V</span>
+            <span>Vectoriza</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="cuadricas.html">Aprender</a>
+            <a href="cuadricas.html#practica">Practicar</a>
+            <a href="progreso.html" class="active">Mi progreso</a>
+        </nav>
+    </header>
+
+    <main class="lesson-container">
+        <section class="lesson-hero">
+            <span class="eyebrow">TU RECORRIDO ACADÉMICO</span>
+            <h1>Mi <span>progreso</span></h1>
+            <p>
+                Consulta tus resultados y sigue avanzando en el aprendizaje
+                del Cálculo Vectorial.
+            </p>
+        </section>
+
+        <section class="progress-dashboard">
+            <article class="progress-stat">
+                <span class="stat-icon">✓</span>
+                <p>Lecciones completadas</p>
+                <strong id="completed-count">0</strong>
+            </article>
+
+            <article class="progress-stat">
+                <span class="stat-icon">✎</span>
+                <p>Intentos realizados</p>
+                <strong id="attempt-count">0</strong>
+            </article>
+
+            <article class="progress-stat">
+                <span class="stat-icon">★</span>
+                <p>Respuestas correctas</p>
+                <strong id="correct-count">0</strong>
+            </article>
+        </section>
+
+        <section class="lesson-block">
+            <div class="lesson-heading">
+                <span class="lesson-number">01</span>
+                <div>
+                    <h2>Superficies cuádricas</h2>
+                    <p>Tu primera lección de geometría en el espacio.</p>
+                </div>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill" id="lesson-progress-fill"></div>
+            </div>
+
+            <p class="progress-description" id="lesson-progress-text">
+                Todavía no has completado esta lección.
+            </p>
+
+            <a href="cuadricas.html" class="btn btn-primary">
+                Continuar aprendiendo
+            </a>
+        </section>
+
+        <section class="lesson-finish">
+            <div>
+                <span class="eyebrow">SIGUIENTE OBJETIVO</span>
+                <h2>Aprender es avanzar paso a paso.</h2>
+                <p>Repasa las explicaciones, practica y vuelve a intentarlo cuando lo necesites.</p>
+            </div>
+            <a href="cuadricas.html" class="btn btn-primary">Ir a la lección</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">V</span>
+            <span>Vectoriza</span>
+        </a>
+        <p>Aprende a tu ritmo.</p>
+        <span>Proyecto académico · 2026</span>
+    </footer>
+</body>
+</html>

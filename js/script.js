@@ -108,3 +108,75 @@ document.addEventListener('DOMContentLoaded', () => {
         feedback.className = 'quiz-feedback';
     });
 });
+
+// Registro local del progreso académico.
+document.addEventListener('DOMContentLoaded', () => {
+    const storageKey = 'vectorizaProgress';
+
+    function readProgress() {
+        try {
+            return JSON.parse(localStorage.getItem(storageKey)) || {
+                completedLessons: [],
+                attempts: 0,
+                correctAnswers: 0
+            };
+        } catch {
+            return {
+                completedLessons: [],
+                attempts: 0,
+                correctAnswers: 0
+            };
+        }
+    }
+
+    function saveProgress(progress) {
+        localStorage.setItem(storageKey, JSON.stringify(progress));
+    }
+
+    const quiz = document.querySelector('#quiz');
+
+    if (quiz) {
+        const checkButton = quiz.querySelector('#check-answer');
+        const options = quiz.querySelectorAll('.quiz-option');
+
+        checkButton.addEventListener('click', () => {
+            const selected = quiz.querySelector('.quiz-option.selected');
+
+            if (!selected || options[0].disabled) return;
+
+            const progress = readProgress();
+            progress.attempts += 1;
+
+            if (selected.dataset.answer === 'b') {
+                progress.correctAnswers += 1;
+            }
+
+            if (!progress.completedLessons.includes('cuadricas')) {
+                progress.completedLessons.push('cuadricas');
+            }
+
+            saveProgress(progress);
+        }, true);
+    }
+
+    // Mostrar las estadísticas en la página de progreso.
+    const completedCount = document.querySelector('#completed-count');
+
+    if (completedCount) {
+        const progress = readProgress();
+        const attempts = document.querySelector('#attempt-count');
+        const correct = document.querySelector('#correct-count');
+        const fill = document.querySelector('#lesson-progress-fill');
+        const text = document.querySelector('#lesson-progress-text');
+
+        completedCount.textContent = progress.completedLessons.length;
+        attempts.textContent = progress.attempts;
+        correct.textContent = progress.correctAnswers;
+
+        const completed = progress.completedLessons.includes('cuadricas');
+        fill.style.width = completed ? '100%' : '0%';
+        text.textContent = completed
+            ? 'Lección completada: ya respondiste el cuestionario al menos una vez.'
+            : 'Todavía no has completado esta lección.';
+    }
+});
