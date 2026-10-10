@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aprende a identificar y analizar secciones cónicas en Cálculo Vectorial.">
+    <title>Secciones cónicas | Vectoriza</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">V</span>
+            <span>Vectoriza</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="cuadricas.html">Cuádricas</a>
+            <a href="conicas.html" class="active">Cónicas</a>
+            <a href="progreso.html">Mi progreso</a>
+        </nav>
+    </header>
+
+    <main class="lesson-container">
+        <a href="index.html" class="back-link">← Volver al inicio</a>
+
+        <section class="lesson-hero">
+            <span class="eyebrow">MÓDULO 02 · GEOMETRÍA ANALÍTICA</span>
+            <h1>Secciones <span>cónicas</span></h1>
+            <p>
+                Aprende a reconocer las cónicas a partir de sus ecuaciones
+                y a identificar sus principales características geométricas.
+            </p>
+            <div class="lesson-tags">
+                <span>Circunferencia</span>
+                <span>Parábola</span>
+                <span>Elipse e hipérbola</span>
+            </div>
+        </section>
+
+        <section class="lesson-block">
+            <div class="lesson-heading">
+                <span class="lesson-number">01</span>
+                <div>
+                    <h2>¿Qué son las secciones cónicas?</h2>
+                    <p>Cuatro curvas fundamentales.</p>
+                </div>
+            </div>
+            <p>
+                Las secciones cónicas son curvas que se estudian mediante
+                ecuaciones de segundo grado en dos variables. Para
+                identificarlas, analizamos los términos cuadrados,
+                sus signos y la forma de la ecuación.
+            </p>
+        </section>
+
+        <section class="conic-grid">
+            <article class="conic-card">
+                <div class="conic-symbol">○</div>
+                <h3>Circunferencia</h3>
+                <div class="formula formula-small">
+                    (x-h)² + (y-k)² = r²
+                </div>
+                <p>
+                    Todos sus puntos están a una distancia fija r
+                    del centro (h,k).
+                </p>
+            </article>
+
+            <article class="conic-card">
+                <div class="conic-symbol">⌒</div>
+                <h3>Parábola</h3>
+                <div class="formula formula-small">
+                    (x-h)² = 4p(y-k)
+                </div>
+                <p>
+                    Tiene un vértice y un foco. Su orientación depende
+                    de la variable que está elevada al cuadrado.
+                </p>
+            </article>
+
+            <article class="conic-card">
+                <div class="conic-symbol">⬭</div>
+                <h3>Elipse</h3>
+                <div class="formula formula-small">
+                    x²/a² + y²/b² = 1
+                </div>
+                <p>
+                    Es una curva cerrada. En su forma canónica,
+                    los términos cuadrados tienen el mismo signo.
+                </p>
+            </article>
+
+            <article class="conic-card">
+                <div class="conic-symbol">∞</div>
+                <h3>Hipérbola</h3>
+                <div class="formula formula-small">
+                    x²/a² - y²/b² = 1
+                </div>
+                <p>
+                    Tiene dos ramas y, en su forma canónica,
+                    los términos cuadrados tienen signos opuestos.
+                </p>
+            </article>
+        </section>
+
+        <section class="lesson-block">
+            <div class="lesson-heading">
+                <span class="lesson-number">02</span>
+                <div>
+                    <h2>Ejemplo resuelto: una elipse</h2>
+                    <p>Identifiquemos el centro y los semiejes.</p>
+                </div>
+            </div>
+
+            <div class="worked-example">
+                <span class="step-label">EJERCICIO</span>
+                <h3>Analiza la siguiente ecuación</h3>
+                <div class="formula">x²/25 + y²/9 = 1</div>
+
+                <div class="solution-step">
+                    <span class="step-index">1</span>
+                    <div>
+                        <h4>Identificamos la forma canónica</h4>
+                        <p>
+                            Los dos términos cuadrados son positivos y
+                            la suma es igual a 1. Por tanto, representa una elipse.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="solution-step">
+                    <span class="step-index">2</span>
+                    <div>
+                        <h4>Encontramos el centro</h4>
+                        <p>
+                            No hay términos lineales ni desplazamientos.
+                            El centro es (0,0).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="solution-step">
+                    <span class="step-index">3</span>
+                    <div>
+                        <h4>Calculamos los semiejes</h4>
+                        <p>
+                            Como a² = 25 y b² = 9, tenemos a = 5 y b = 3.
+                            El eje mayor es horizontal porque 25 está
+                            debajo de x².
+                        </p>
+                        <div class="answer-note">
+                            <strong>Resultado:</strong> centro (0,0),
+                            semieje mayor 5 y semieje menor 3.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-block">
+            <div class="lesson-heading">
+                <span class="lesson-number">03</span>
+                <div>
+                    <h2>Comprueba tu comprensión</h2>
+                    <p>Piensa en los signos de los términos cuadrados.</p>
+                </div>
+            </div>
+
+            <div class="quiz-card" id="conic-quiz">
+                <span class="step-label">PREGUNTA 01</span>
+                <h3>¿Cuál de estas ecuaciones representa una hipérbola?</h3>
+
+                <div class="quiz-options">
+                    <button class="quiz-option" data-answer="a">
+                        A. x² + y² = 16
+                    </button>
+                    <button class="quiz-option" data-answer="b">
+                        B. x²/4 - y²/9 = 1
+                    </button>
+                    <button class="quiz-option" data-answer="c">
+                        C. x²/4 + y²/9 = 1
+                    </button>
+                    <button class="quiz-option" data-answer="d">
+                        D. y = x²
+                    </button>
+                </div>
+
+                <div class="quiz-feedback" id="conic-feedback" aria-live="polite">
+                    Selecciona una respuesta.
+                </div>
+
+                <button class="btn btn-primary" id="conic-check" type="button">
+                    Comprobar respuesta
+                </button>
+                <button class="btn btn-secondary" id="conic-reset" type="button">
+                    Intentar de nuevo
+                </button>
+            </div>
+        </section>
+
+        <section class="lesson-finish">
+            <div>
+                <span class="eyebrow">SIGUIENTE TEMA</span>
+                <h2>Conecta las ecuaciones con la geometría.</h2>
+                <p>Continúa con las superficies cuádricas o repasa los ejemplos antes de avanzar.</p>
+            </div>
+            <a href="cuadricas.html" class="btn btn-primary">Repasar cuádricas</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">V</span>
+            <span>Vectoriza</span>
+        </a>
+        <p>Aprende a tu ritmo.</p>
+        <span>Proyecto académico · 2026</span>
+    </footer>
+
+    <script src="js/conicas.js" defer></script>
+</body>
+</html>
