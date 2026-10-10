@@ -81,3 +81,94 @@ document.addEventListener('DOMContentLoaded', () => {
         feedback.className = 'quiz-feedback';
     });
 });
+
+// Gráfica interactiva de las curvas de nivel
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.querySelector('#level-graph');
+    const slider = document.querySelector('#level-k');
+
+    if (!canvas || !slider) return;
+
+    const context = canvas.getContext('2d');
+    const valueLabel = document.querySelector('#level-k-value');
+    const info = document.querySelector('#level-graph-info');
+
+    function drawLevelCurve() {
+        const k = Number(slider.value);
+        const radius = Math.sqrt(k);
+
+        const width = canvas.width;
+        const height = canvas.height;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const scale = 17;
+
+        context.clearRect(0, 0, width, height);
+
+        // Fondo de la gráfica
+        context.fillStyle = '#ffffff';
+        context.fillRect(0, 0, width, height);
+
+        // Cuadrícula
+        context.strokeStyle = '#e7ebf2';
+        context.lineWidth = 1;
+
+        for (let x = centerX % scale; x < width; x += scale) {
+            context.beginPath();
+            context.moveTo(x, 0);
+            context.lineTo(x, height);
+            context.stroke();
+        }
+
+        for (let y = centerY % scale; y < height; y += scale) {
+            context.beginPath();
+            context.moveTo(0, y);
+            context.lineTo(width, y);
+            context.stroke();
+        }
+
+        // Ejes coordenados
+        context.strokeStyle = '#153866';
+        context.lineWidth = 2;
+
+        context.beginPath();
+        context.moveTo(24, centerY);
+        context.lineTo(width - 20, centerY);
+        context.moveTo(centerX, 20);
+        context.lineTo(centerX, height - 20);
+        context.stroke();
+
+        // Etiquetas de los ejes
+        context.fillStyle = '#153866';
+        context.font = '15px sans-serif';
+        context.fillText('x', width - 18, centerY - 10);
+        context.fillText('y', centerX + 10, 18);
+        context.fillText('0', centerX + 7, centerY + 17);
+
+        // Curva x² + y² = k
+        context.beginPath();
+        context.arc(centerX, centerY, radius * scale, 0, Math.PI * 2);
+        context.strokeStyle = '#f2a30f';
+        context.lineWidth = 4;
+        context.stroke();
+
+        // Marcar el radio sobre el eje x
+        context.beginPath();
+        context.moveTo(centerX, centerY);
+        context.lineTo(centerX + radius * scale, centerY);
+        context.strokeStyle = '#2b6cb0';
+        context.lineWidth = 3;
+        context.stroke();
+
+        context.fillStyle = '#2b6cb0';
+        context.beginPath();
+        context.arc(centerX + radius * scale, centerY, 4, 0, Math.PI * 2);
+        context.fill();
+
+        valueLabel.textContent = `k = ${k}`;
+        info.textContent = `Radio = √${k} ≈ ${radius.toFixed(2)} unidades. La curva contiene los puntos que cumplen x² + y² = ${k}.`;
+    }
+
+    slider.addEventListener('input', drawLevelCurve);
+    drawLevelCurve();
+});

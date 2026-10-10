@@ -54,7 +54,26 @@
         </section>
 
         <section class="lesson-block">
-            <h2>3. Practica lo aprendido</h2>
+            <h2>3. Explora las curvas de nivel</h2>
+            <p>La función es <strong>f(x,y) = x² + y²</strong>. Mueve el control para cambiar el nivel k y observa cómo cambia el radio de la circunferencia.</p>
+
+            <div class="formula">x² + y² = k &nbsp; · &nbsp; r = √k</div>
+
+            <div class="level-controls">
+                <label for="level-k">Valor de k:</label>
+                <input id="level-k" type="range" min="1" max="25" step="1" value="9">
+                <strong id="level-k-value">k = 9</strong>
+            </div>
+
+            <div class="level-graph-wrap">
+                <canvas id="level-graph" width="600" height="440" aria-label="Gráfica de una curva de nivel circular"></canvas>
+            </div>
+
+            <p id="level-graph-info" class="graph-caption">Para k = 9, el radio es √9 = 3.</p>
+        </section>
+
+        <section class="lesson-block">
+            <h2>4. Practica lo aprendido</h2>
             <p>Para la función f(x,y) = x² + y², ¿cuál es la curva de nivel cuando k = 9?</p>
 
             <div class="quiz-card" id="level-quiz">

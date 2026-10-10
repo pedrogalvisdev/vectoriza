@@ -532,3 +532,52 @@
 .progress-details-section {
     margin-top: 28px;
 }
+
+/* Explorador interactivo de curvas de nivel */
+.level-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 22px 0;
+}
+
+.level-controls label {
+    color: var(--text);
+    font-weight: 700;
+}
+
+.level-controls input[type="range"] {
+    flex: 1;
+    min-width: 150px;
+    accent-color: var(--orange);
+    cursor: pointer;
+}
+
+.level-controls strong {
+    color: var(--blue);
+    min-width: 55px;
+}
+
+.level-graph-wrap {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: white;
+}
+
+#level-graph {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.graph-caption {
+    margin-top: 14px;
+    padding: 14px;
+    background: var(--blue-light);
+    color: var(--blue);
+    border-radius: 10px;
+    line-height: 1.6;
+}
