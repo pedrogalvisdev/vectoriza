@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aprende a identificar superficies cuádricas con ejemplos y ejercicios interactivos.">
+    <title>Superficies cuádricas | Vectoriza</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">V</span>
+            <span>Vectoriza</span>
+        </a>
+        <nav class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="#teoria" class="active">Aprender</a>
+            <a href="#practica">Practicar</a>
+        </nav>
+    </header>
+
+    <main class="lesson-container">
+        <a href="index.html" class="back-link">← Volver al inicio</a>
+
+        <section class="lesson-hero" id="teoria">
+            <span class="eyebrow">MÓDULO 01 · GEOMETRÍA EN EL ESPACIO</span>
+            <h1>Superficies <span>cuádricas</span></h1>
+            <p>
+                Aprende a reconocer superficies en tres dimensiones,
+                transformar sus ecuaciones y comprender sus características.
+            </p>
+            <div class="lesson-tags">
+                <span>Conceptos básicos</span>
+                <span>Ejemplos resueltos</span>
+                <span>Práctica interactiva</span>
+            </div>
+        </section>
+
+        <section class="lesson-block">
+            <div class="lesson-heading">
+                <span class="lesson-number">01</span>
+                <div>
+                    <h2>¿Qué es una superficie cuádrica?</h2>
+                    <p>Primero, comprendamos la idea.</p>
+                </div>
+            </div>
+            <p>
+                Una superficie cuádrica es una superficie en el espacio
+                tridimensional cuya ecuación contiene términos de segundo
+                grado, como x², y² o z². Su forma depende de los coeficientes,
+                los signos y la manera en que aparecen las variables.
+            </p>
+            <div class="formula-card">
+                <span>Forma general</span>
+                <div class="formula">Ax² + By² + Cz² + Dx + Ey + Fz + G = 0</div>
+                <p>Esta expresión puede representar diferentes superficies.</p>
+            </div>
+        </section>
+
+        <section class="lesson-block">
+            <div class="lesson-heading">
+                <span class="lesson-number">02</span>
+                <div>
+                    <h2>Ejemplo resuelto</h2>
+                    <p>Transformemos la ecuación paso a paso.</p>
+                </div>
+            </div>
+
+            <div class="worked-example">
+                <span class="step-label">EJERCICIO</span>
+                <h3>Identifica la superficie</h3>
+                <div class="formula">x² + 4y² + 9z² = 36</div>
+
+                <div class="solution-step">
+                    <span class="step-index">1</span>
+                    <div>
+                        <h4>Dividimos toda la ecuación entre 36</h4>
+                        <p>Buscamos que el lado derecho sea igual a 1.</p>
+                        <div class="formula formula-small">
+                            x²/36 + 4y²/36 + 9z²/36 = 1
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-step">
+                    <span class="step-index">2</span>
+                    <div>
+                        <h4>Simplificamos cada término</h4>
+                        <div class="formula formula-small">
+                            x²/36 + y²/9 + z²/4 = 1
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-step">
+                    <span class="step-index">3</span>
+                    <div>
+                        <h4>Comparamos con la forma canónica</h4>
+                        <p>
+                            Los tres términos cuadrados son positivos,
+                            tienen denominadores positivos y la suma es 1.
+                        </p>
+                        <div class="answer-note">
+                            <strong>Conclusión:</strong> es un elipsoide
+                            centrado en el origen.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-block" id="practica">
+            <div class="lesson-heading">
+                <span class="lesson-number">03</span>
+                <div>
+                    <h2>Comprueba lo aprendido</h2>
+                    <p>Selecciona una respuesta y revisa tu resultado.</p>
+                </div>
+            </div>
+
+            <div class="quiz-card" id="quiz">
+                <span class="step-label">PREGUNTA 01</span>
+                <h3>¿Qué superficie representa esta ecuación?</h3>
+                <div class="formula">x²/4 + y²/9 + z²/16 = 1</div>
+
+                <div class="quiz-options">
+                    <button class="quiz-option" data-answer="a">
+                        A. Un paraboloide elíptico
+                    </button>
+                    <button class="quiz-option" data-answer="b">
+                        B. Un elipsoide
+                    </button>
+                    <button class="quiz-option" data-answer="c">
+                        C. Un hiperboloide de una hoja
+                    </button>
+                    <button class="quiz-option" data-answer="d">
+                        D. Un cilindro circular
+                    </button>
+                </div>
+
+                <div class="quiz-feedback" id="quiz-feedback" aria-live="polite">
+                    Elige una opción para comprobar tu respuesta.
+                </div>
+
+                <button class="btn btn-primary" id="check-answer" type="button">
+                    Comprobar respuesta
+                </button>
+                <button class="btn btn-secondary" id="reset-quiz" type="button">
+                    Intentar de nuevo
+                </button>
+            </div>
+        </section>
+
+        <section class="lesson-finish">
+            <div>
+                <span class="eyebrow">SIGUIENTE PASO</span>
+                <h2>¡Vas construyendo tus bases!</h2>
+                <p>Cuando domines este concepto, podrás estudiar otras superficies y sus características.</p>
+            </div>
+            <a href="index.html" class="btn btn-primary">Volver al inicio</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">V</span>
+            <span>Vectoriza</span>
+        </a>
+        <p>Aprende a tu ritmo.</p>
+        <span>Proyecto académico · 2026</span>
+    </footer>
+</body>
+</html>
