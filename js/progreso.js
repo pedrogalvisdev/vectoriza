@@ -1,56 +1,51 @@
 
-document.addEventListener("DOMContentLoaded", () => {
-    actualizarPanelProgreso();
-});
-
-/* =========================================
-   CONFIGURACIÓN
-========================================= */
+document.addEventListener("DOMContentLoaded", actualizarPanelProgreso);
 
 const LECCIONES_VECTORIZA = [
     {
+        id: "funciones",
+        nombre: "Funciones de varias variables",
+        clave: "vectorizaFuncionesProgress",
+        pagina: "funciones.html"
+    },
+    {
         id: "cuadricas",
         nombre: "Superficies cuádricas",
-        clave: "vectorizaProgress"
+        clave: "vectorizaProgress",
+        pagina: "cuadricas.html"
     },
     {
         id: "conicas",
         nombre: "Cónicas",
-        clave: "vectorizaConicasProgress"
+        clave: "vectorizaConicasProgress",
+        pagina: "conicas.html"
     },
     {
         id: "curvas",
         nombre: "Curvas de nivel",
-        clave: "vectorizaCurvasProgress"
+        clave: "vectorizaCurvasProgress",
+        pagina: "curvas.html"
     }
 ];
 
 /* =========================================
-   LECTURA DE DATOS
+   LECTURA DEL PROGRESO
 ========================================= */
 
 function leerEstadisticas(clave) {
     try {
         const contenido = localStorage.getItem(clave);
+        const datos = contenido ? JSON.parse(contenido) : {};
 
-        if (!contenido) {
-            return {
-                attempts: 0,
-                correctAnswers: 0
-            };
-        }
-
-        const datos = JSON.parse(contenido);
+        const intentos = Math.max(0, Number(datos.attempts) || 0);
+        const aciertos = Math.max(0, Number(datos.correctAnswers) || 0);
 
         return {
-            attempts: Math.max(0, Number(datos.attempts) || 0),
-            correctAnswers: Math.max(
-                0,
-                Number(datos.correctAnswers) || 0
-            )
+            attempts: intentos,
+            correctAnswers: Math.min(aciertos, intentos)
         };
     } catch (error) {
-        console.error(`No se pudieron leer las estadísticas de ${clave}:`, error);
+        console.error("Error al leer las estadísticas:", error);
 
         return {
             attempts: 0,
@@ -60,7 +55,7 @@ function leerEstadisticas(clave) {
 }
 
 /* =========================================
-   CÁLCULO DEL PROGRESO
+   CÁLCULO DE ESTADÍSTICAS
 ========================================= */
 
 function calcularProgresoGeneral() {
@@ -72,7 +67,8 @@ function calcularProgresoGeneral() {
             ...estadisticas,
             porcentajeAciertos: estadisticas.attempts > 0
                 ? Math.round(
-                    (estadisticas.correctAnswers / estadisticas.attempts) * 100
+                    estadisticas.correctAnswers /
+                    estadisticas.attempts * 100
                 )
                 : 0
         };
@@ -93,11 +89,11 @@ function calcularProgresoGeneral() {
     ).length;
 
     const porcentajeLecciones = Math.round(
-        (leccionesIniciadas / LECCIONES_VECTORIZA.length) * 100
+        leccionesIniciadas / lecciones.length * 100
     );
 
     const porcentajeAciertos = intentosTotales > 0
-        ? Math.round((respuestasCorrectas / intentosTotales) * 100)
+        ? Math.round(respuestasCorrectas / intentosTotales * 100)
         : 0;
 
     return {
@@ -136,7 +132,7 @@ function actualizarPanelProgreso() {
         );
     }
 
-    establecerDescripcion(progreso);
+    actualizarDescripcion(progreso);
     renderizarDetalleProgreso(progreso.lecciones);
 }
 
@@ -148,7 +144,7 @@ function establecerTexto(id, valor) {
     }
 }
 
-function establecerDescripcion(progreso) {
+function actualizarDescripcion(progreso) {
     const descripcion = document.querySelector(
         "#progress-description, .progress-description"
     );
@@ -164,13 +160,14 @@ function establecerDescripcion(progreso) {
     }
 
     descripcion.textContent =
-        `Has iniciado ${progreso.leccionesIniciadas} de ${LECCIONES_VECTORIZA.length} temas ` +
-        `y llevas ${progreso.intentosTotales} intentos, con un ${progreso.porcentajeAciertos}% ` +
-        "de respuestas correctas.";
+        `Has iniciado ${progreso.leccionesIniciadas} de ` +
+        `${progreso.lecciones.length} temas. Llevas ` +
+        `${progreso.intentosTotales} intentos y un ` +
+        `${progreso.porcentajeAciertos}% de respuestas correctas.`;
 }
 
 /* =========================================
-   DETALLE POR LECCIÓN
+   DETALLE DE CADA LECCIÓN
 ========================================= */
 
 function renderizarDetalleProgreso(lecciones) {
@@ -186,11 +183,14 @@ function renderizarDetalleProgreso(lecciones) {
         const tarjeta = document.createElement("article");
         tarjeta.className = "progress-detail-card";
 
-        const encabezado = document.createElement("h3");
-        encabezado.textContent = leccion.nombre;
+        const titulo = document.createElement("h3");
+        const enlace = document.createElement("a");
+
+        enlace.href = leccion.pagina;
+        enlace.textContent = leccion.nombre;
+        titulo.appendChild(enlace);
 
         const estado = document.createElement("p");
-        estado.className = "progress-detail-status";
         estado.textContent = leccion.attempts > 0
             ? "Cuestionario iniciado"
             : "Pendiente";
@@ -207,7 +207,7 @@ function renderizarDetalleProgreso(lecciones) {
             `Porcentaje de aciertos: ${leccion.porcentajeAciertos}%`;
 
         tarjeta.append(
-            encabezado,
+            titulo,
             estado,
             intentos,
             aciertos,

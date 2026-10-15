@@ -1,16 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aprende y explora curvas de nivel de funciones de dos variables en Cálculo Vectorial.">
     <title>Curvas de nivel | Vectoriza</title>
     <link rel="stylesheet" href="css/styles.css">
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script src="js/script.js" defer></script>
     <script src="js/curvas.js" defer></script>
 </head>
+
 <body>
     <header class="navbar">
-        <a class="logo" href="index.html">Vectoriza</a>
+        <a class="logo" href="index.html">
+            <span class="logo-icon">V</span>
+            <span>Vectoriza</span>
+        </a>
+
         <nav class="nav-links">
             <a href="index.html">Inicio</a>
             <a href="cuadricas.html">Cuádricas</a>
@@ -21,86 +41,357 @@
     </header>
 
     <main class="lesson-container">
+        <a href="index.html" class="back-link">← Volver al inicio</a>
+
         <section class="lesson-hero">
-            <span class="eyebrow">APRENDER · TEMA 3</span>
-            <h1>Curvas de nivel</h1>
-            <p>Aprende a representar funciones de dos variables mediante curvas en el plano.</p>
-        </section>
+            <span class="eyebrow">APRENDER · TEMA 03</span>
+            <h1>Curvas de <span>nivel</span></h1>
+            <p>
+                Aprende a representar funciones de dos variables mediante
+                curvas en el plano y descubre cómo cambia su forma al modificar
+                el valor del nivel.
+            </p>
 
-        <section class="lesson-block">
-            <h2>1. ¿Qué es una curva de nivel?</h2>
-            <p>Una función de dos variables tiene la forma <strong>f(x,y)</strong>. Para obtener una curva de nivel, igualamos la función a una constante <strong>k</strong>:</p>
-            <div class="formula">f(x, y) = k</div>
-            <p>Al cambiar el valor de k, obtenemos diferentes curvas. Cada una representa los puntos del plano donde la función tiene el mismo valor.</p>
-        </section>
-
-        <section class="lesson-block">
-            <h2>2. Ejemplo paso a paso</h2>
-            <p>Encuentra la curva de nivel de la función:</p>
-            <div class="formula">f(x, y) = x² + y²</div>
-            <p><strong>Paso 1.</strong> Elegimos el nivel k = 4 y lo igualamos a la función.</p>
-            <div class="formula">x² + y² = 4</div>
-            <p><strong>Paso 2.</strong> Identificamos la ecuación. Corresponde a una circunferencia con centro en (0, 0) y radio 2.</p>
-            <p><strong>Paso 3.</strong> Comprobamos algunos puntos:</p>
-            <ul>
-                <li>(2, 0): 2² + 0² = 4.</li>
-                <li>(0, 2): 0² + 2² = 4.</li>
-                <li>(-2, 0): (-2)² + 0² = 4.</li>
-                <li>(0, -2): 0² + (-2)² = 4.</li>
-            </ul>
-            <div class="worked-example">
-                <strong>Conclusión:</strong> los cuatro puntos cumplen la ecuación y pertenecen a la circunferencia de radio 2.
+            <div class="lesson-tags">
+                <span>Funciones de dos variables</span>
+                <span>Curvas de nivel</span>
+                <span>Gráfica interactiva</span>
             </div>
         </section>
 
         <section class="lesson-block">
-            <h2>3. Explora las curvas de nivel</h2>
-            <p>La función es <strong>f(x,y) = x² + y²</strong>. Mueve el control para cambiar el nivel k y observa cómo cambia el radio de la circunferencia.</p>
+            <div class="lesson-heading">
+                <span class="lesson-number">01</span>
+                <div>
+                    <h2>¿Qué es una curva de nivel?</h2>
+                    <p>La idea fundamental.</p>
+                </div>
+            </div>
 
-            <div class="formula">x² + y² = k &nbsp; · &nbsp; r = √k</div>
+            <p>
+                Una función de dos variables tiene la forma \(f(x,y)\).
+                Para obtener una curva de nivel, igualamos la función a una
+                constante \(k\).
+            </p>
+
+            <div class="formula-card">
+                <span>Expresión general</span>
+                <div class="formula">
+                    \[f(x,y)=k\]
+                </div>
+                <p>
+                    Al cambiar el valor de \(k\), obtenemos diferentes curvas.
+                    Cada una reúne los puntos del plano donde la función tiene
+                    el mismo valor.
+                </p>
+            </div>
+        </section>
+
+        <section class="lesson-block">
+            <div class="lesson-heading">
+                <span class="lesson-number">02</span>
+                <div>
+                    <h2>Ejemplo paso a paso</h2>
+                    <p>Encontramos una curva de nivel.</p>
+                </div>
+            </div>
+
+            <div class="worked-example">
+                <span class="step-label">EJERCICIO RESUELTO</span>
+                <h3>Encuentra la curva de nivel de la función</h3>
+
+                <div class="formula">
+                    \[f(x,y)=x^2+y^2\]
+                </div>
+
+                <div class="solution-step">
+                    <span class="step-index">1</span>
+                    <div>
+                        <h4>Elegimos el nivel</h4>
+                        <p>
+                            Tomamos \(k=4\) e igualamos la función a esa constante.
+                        </p>
+                        <div class="formula formula-small">
+                            \[x^2+y^2=4\]
+                        </div>
+                    </div>
+                </div>
+
+                <div class="solution-step">
+                    <span class="step-index">2</span>
+                    <div>
+                        <h4>Identificamos la curva</h4>
+                        <p>
+                            Esta ecuación representa una circunferencia con
+                            centro en \((0,0)\) y radio \(r=2\), porque
+                            \(r^2=4\).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="solution-step">
+                    <span class="step-index">3</span>
+                    <div>
+                        <h4>Comprobamos algunos puntos</h4>
+                        <ul>
+                            <li>\((2,0)\): \(2^2+0^2=4\).</li>
+                            <li>\((0,2)\): \(0^2+2^2=4\).</li>
+                            <li>\((-2,0)\): \((-2)^2+0^2=4\).</li>
+                            <li>\((0,-2)\): \(0^2+(-2)^2=4\).</li>
+                        </ul>
+
+                        <div class="answer-note">
+                            <strong>Conclusión:</strong> los cuatro puntos
+                            cumplen la ecuación y pertenecen a la circunferencia
+                            de radio 2.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="lesson-block">
+            <div class="lesson-heading">
+                <span class="lesson-number">03</span>
+                <div>
+                    <h2>Explora las curvas de nivel</h2>
+                    <p>Cambia el valor de \(k\) y observa la gráfica.</p>
+                </div>
+            </div>
+
+            <p>
+                Considera la función \(f(x,y)=x^2+y^2\). Mueve el control
+                para cambiar el nivel \(k\) y observa cómo cambia el radio
+                de la circunferencia.
+            </p>
+
+            <div class="formula-card">
+                <div class="formula">
+                    \[x^2+y^2=k \qquad r=\sqrt{k}\]
+                </div>
+                <p>
+                    Como el radio es la raíz cuadrada de \(k\), al aumentar
+                    el nivel también aumenta el tamaño de la circunferencia.
+                </p>
+            </div>
 
             <div class="level-controls">
-                <label for="level-k">Valor de k:</label>
-                <input id="level-k" type="range" min="1" max="25" step="1" value="9">
+                <label for="level-k">Valor de \(k\):</label>
+                <input
+                    id="level-k"
+                    type="range"
+                    min="1"
+                    max="25"
+                    step="1"
+                    value="9"
+                    aria-label="Cambiar el valor del nivel k"
+                >
                 <strong id="level-k-value">k = 9</strong>
             </div>
 
             <div class="level-graph-wrap">
-                <canvas id="level-graph" width="600" height="440" aria-label="Gráfica de una curva de nivel circular"></canvas>
+                <canvas
+                    id="level-graph"
+                    width="600"
+                    height="440"
+                    role="img"
+                    aria-label="Gráfica de la curva de nivel, una circunferencia centrada en el origen"
+                >
+                    Tu navegador no permite mostrar esta gráfica.
+                </canvas>
             </div>
 
-            <p id="level-graph-info" class="graph-caption">Para k = 9, el radio es √9 = 3.</p>
+            <p id="level-graph-info" class="graph-caption" aria-live="polite">
+                Para k = 9, el radio es √9 = 3.
+            </p>
         </section>
 
         <section class="lesson-block">
-            <h2>4. Practica lo aprendido</h2>
-            <p>Para la función f(x,y) = x² + y², ¿cuál es la curva de nivel cuando k = 9?</p>
+            <div class="lesson-heading">
+                <span class="lesson-number">04</span>
+                <div>
+                    <h2>Practica lo aprendido</h2>
+                    <p>Comprueba si entendiste el procedimiento.</p>
+                </div>
+            </div>
 
             <div class="quiz-card" id="level-quiz">
-                <button type="button" class="quiz-option" data-answer="a">A. x + y = 9</button>
-                <button type="button" class="quiz-option" data-answer="b">B. x² + y² = 9</button>
-                <button type="button" class="quiz-option" data-answer="c">C. x² - y² = 9</button>
-                <button type="button" class="quiz-option" data-answer="d">D. x² + y² = 3</button>
+                <span class="step-label">PREGUNTA 01</span>
 
-                <p class="quiz-feedback" id="level-feedback" aria-live="polite">Selecciona una respuesta y comprueba.</p>
+                <h3>
+                    Para la función \(f(x,y)=x^2+y^2\),
+                    ¿cuál es la curva de nivel cuando \(k=9\)?
+                </h3>
+
+                <div class="quiz-options">
+                    <button type="button" class="quiz-option" data-answer="a" aria-pressed="false">
+                        A. \(x+y=9\)
+                    </button>
+
+                    <button type="button" class="quiz-option" data-answer="b" aria-pressed="false">
+                        B. \(x^2+y^2=9\)
+                    </button>
+
+                    <button type="button" class="quiz-option" data-answer="c" aria-pressed="false">
+                        C. \(x^2-y^2=9\)
+                    </button>
+
+                    <button type="button" class="quiz-option" data-answer="d" aria-pressed="false">
+                        D. \(x^2+y^2=3\)
+                    </button>
+                </div>
+
+                <p class="quiz-feedback" id="level-feedback" aria-live="polite">
+                    Selecciona una respuesta y comprueba.
+                </p>
 
                 <div class="quiz-actions">
-                    <button class="button" type="button" id="level-check">Comprobar respuesta</button>
-                    <button class="button button-secondary" type="button" id="level-reset">Intentar de nuevo</button>
+                    <button class="button btn btn-primary" type="button" id="level-check">
+                        Comprobar respuesta
+                    </button>
+
+                    <button class="button button-secondary btn btn-secondary" type="button" id="level-reset">
+                        Intentar de nuevo
+                    </button>
                 </div>
             </div>
         </section>
 
         <section class="lesson-finish">
-            <h2>¡Buen trabajo!</h2>
-            <p>Ya conoces el procedimiento básico: igualar la función a k, identificar la ecuación resultante y comprobar puntos.</p>
-            <a class="button" href="progreso.html">Ver mi progreso</a>
-            <a class="button button-secondary" href="index.html">Volver al inicio</a>
+            <div>
+                <span class="eyebrow">¡TEMA COMPLETADO!</span>
+                <h2>¡Buen trabajo!</h2>
+                <p>
+                    Ya conoces el procedimiento básico: igualar la función
+                    a \(k\), identificar la ecuación resultante y comprobar puntos.
+                </p>
+            </div>
+
+            <a class="button btn btn-primary" href="progreso.html">
+                Ver mi progreso
+            </a>
+
+            <a class="button button-secondary btn btn-secondary" href="index.html">
+                Volver al inicio
+            </a>
         </section>
     </main>
 
     <footer class="footer">
-        <p>Vectoriza · Aprende Cálculo Vectorial paso a paso</p>
+        <a class="logo" href="index.html">
+            <span class="logo-icon">V</span>
+            <span>Vectoriza</span>
+        </a>
+        <p>Aprende Cálculo Vectorial paso a paso.</p>
+        <span>Proyecto académico · 2026</span>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const quiz = document.getElementById('level-quiz');
+
+            if (!quiz) return;
+
+            const opciones = quiz.querySelectorAll('.quiz-option');
+            const comprobar = document.getElementById('level-check');
+            const reiniciar = document.getElementById('level-reset');
+            const feedback = document.getElementById('level-feedback');
+
+            let seleccionada = null;
+            let respondida = false;
+
+            opciones.forEach(function (opcion) {
+                opcion.addEventListener('click', function () {
+                    if (respondida) return;
+
+                    seleccionada = opcion.dataset.answer;
+
+                    opciones.forEach(function (otra) {
+                        otra.classList.remove('selected', 'correct', 'incorrect');
+                        otra.setAttribute('aria-pressed', 'false');
+                    });
+
+                    opcion.classList.add('selected');
+                    opcion.setAttribute('aria-pressed', 'true');
+
+                    feedback.textContent =
+                        'Respuesta seleccionada. Pulsa "Comprobar respuesta".';
+                });
+            });
+
+            comprobar.addEventListener('click', function () {
+                if (respondida) return;
+
+                if (!seleccionada) {
+                    feedback.textContent =
+                        'Primero debes seleccionar una respuesta.';
+                    return;
+                }
+
+                respondida = true;
+
+                const correcta = seleccionada === 'b';
+
+                opciones.forEach(function (opcion) {
+                    opcion.disabled = true;
+
+                    if (opcion.dataset.answer === 'b') {
+                        opcion.classList.add('correct');
+                    } else if (opcion.dataset.answer === seleccionada) {
+                        opcion.classList.add('incorrect');
+                    }
+                });
+
+                if (correcta) {
+                    feedback.textContent =
+                        '¡Correcto! Al sustituir k = 9, obtenemos x² + y² = 9. Es una circunferencia de radio 3.';
+                } else {
+                    feedback.textContent =
+                        'No es correcto. Igualamos x² + y² a k. Como k = 9, la respuesta correcta es la B.';
+                }
+
+                guardarProgreso(correcta);
+            });
+
+            reiniciar.addEventListener('click', function () {
+                seleccionada = null;
+                respondida = false;
+
+                opciones.forEach(function (opcion) {
+                    opcion.disabled = false;
+                    opcion.classList.remove('selected', 'correct', 'incorrect');
+                    opcion.setAttribute('aria-pressed', 'false');
+                });
+
+                feedback.textContent = 'Selecciona una respuesta y comprueba.';
+            });
+
+            function guardarProgreso(correcta) {
+                try {
+                    const clave = 'vectorizaProgress';
+                    const datos = JSON.parse(localStorage.getItem(clave)) || {};
+
+                    if (!Array.isArray(datos.completedLessons)) {
+                        datos.completedLessons = [];
+                    }
+
+                    datos.attempts = (Number(datos.attempts) || 0) + 1;
+
+                    if (correcta) {
+                        datos.correctAnswers =
+                            (Number(datos.correctAnswers) || 0) + 1;
+
+                        if (!datos.completedLessons.includes('curvas')) {
+                            datos.completedLessons.push('curvas');
+                        }
+                    }
+
+                    localStorage.setItem(clave, JSON.stringify(datos));
+                } catch (error) {
+                    console.warn('No se pudo guardar el progreso:', error);
+                }
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,13 +7,30 @@
     <meta name="description" content="Aprende a identificar y analizar secciones cónicas en Cálculo Vectorial.">
     <title>Secciones cónicas | Vectoriza</title>
     <link rel="stylesheet" href="css/styles.css">
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/conicas.js" defer></script>
 </head>
+
 <body>
     <header class="navbar">
         <a href="index.html" class="logo">
             <span class="logo-icon">V</span>
             <span>Vectoriza</span>
         </a>
+
         <nav class="nav-links">
             <a href="index.html">Inicio</a>
             <a href="cuadricas.html">Cuádricas</a>
@@ -31,6 +49,7 @@
                 Aprende a reconocer las cónicas a partir de sus ecuaciones
                 y a identificar sus principales características geométricas.
             </p>
+
             <div class="lesson-tags">
                 <span>Circunferencia</span>
                 <span>Parábola</span>
@@ -46,6 +65,7 @@
                     <p>Cuatro curvas fundamentales.</p>
                 </div>
             </div>
+
             <p>
                 Las secciones cónicas son curvas que se estudian mediante
                 ecuaciones de segundo grado en dos variables. Para
@@ -59,11 +79,11 @@
                 <div class="conic-symbol">○</div>
                 <h3>Circunferencia</h3>
                 <div class="formula formula-small">
-                    (x-h)² + (y-k)² = r²
+                    \[(x-h)^2+(y-k)^2=r^2\]
                 </div>
                 <p>
-                    Todos sus puntos están a una distancia fija r
-                    del centro (h,k).
+                    Todos sus puntos están a una distancia fija \(r\)
+                    del centro \((h,k)\).
                 </p>
             </article>
 
@@ -71,7 +91,7 @@
                 <div class="conic-symbol">⌒</div>
                 <h3>Parábola</h3>
                 <div class="formula formula-small">
-                    (x-h)² = 4p(y-k)
+                    \[(x-h)^2=4p(y-k)\]
                 </div>
                 <p>
                     Tiene un vértice y un foco. Su orientación depende
@@ -83,7 +103,7 @@
                 <div class="conic-symbol">⬭</div>
                 <h3>Elipse</h3>
                 <div class="formula formula-small">
-                    x²/a² + y²/b² = 1
+                    \[\frac{x^2}{a^2}+\frac{y^2}{b^2}=1\]
                 </div>
                 <p>
                     Es una curva cerrada. En su forma canónica,
@@ -95,7 +115,7 @@
                 <div class="conic-symbol">∞</div>
                 <h3>Hipérbola</h3>
                 <div class="formula formula-small">
-                    x²/a² - y²/b² = 1
+                    \[\frac{x^2}{a^2}-\frac{y^2}{b^2}=1\]
                 </div>
                 <p>
                     Tiene dos ramas y, en su forma canónica,
@@ -116,7 +136,10 @@
             <div class="worked-example">
                 <span class="step-label">EJERCICIO</span>
                 <h3>Analiza la siguiente ecuación</h3>
-                <div class="formula">x²/25 + y²/9 = 1</div>
+
+                <div class="formula">
+                    \[\frac{x^2}{25}+\frac{y^2}{9}=1\]
+                </div>
 
                 <div class="solution-step">
                     <span class="step-index">1</span>
@@ -135,7 +158,7 @@
                         <h4>Encontramos el centro</h4>
                         <p>
                             No hay términos lineales ni desplazamientos.
-                            El centro es (0,0).
+                            El centro es \((0,0)\).
                         </p>
                     </div>
                 </div>
@@ -145,12 +168,13 @@
                     <div>
                         <h4>Calculamos los semiejes</h4>
                         <p>
-                            Como a² = 25 y b² = 9, tenemos a = 5 y b = 3.
-                            El eje mayor es horizontal porque 25 está
-                            debajo de x².
+                            Como \(a^2=25\) y \(b^2=9\), tenemos
+                            \(a=5\) y \(b=3\). El eje mayor es horizontal
+                            porque 25 está debajo de \(x^2\).
                         </p>
+
                         <div class="answer-note">
-                            <strong>Resultado:</strong> centro (0,0),
+                            <strong>Resultado:</strong> centro \((0,0)\),
                             semieje mayor 5 y semieje menor 3.
                         </div>
                     </div>
@@ -172,17 +196,20 @@
                 <h3>¿Cuál de estas ecuaciones representa una hipérbola?</h3>
 
                 <div class="quiz-options">
-                    <button class="quiz-option" data-answer="a">
-                        A. x² + y² = 16
+                    <button type="button" class="quiz-option" data-answer="a" aria-pressed="false">
+                        A. \(x^2+y^2=16\)
                     </button>
-                    <button class="quiz-option" data-answer="b">
-                        B. x²/4 - y²/9 = 1
+
+                    <button type="button" class="quiz-option" data-answer="b" aria-pressed="false">
+                        B. \(\frac{x^2}{4}-\frac{y^2}{9}=1\)
                     </button>
-                    <button class="quiz-option" data-answer="c">
-                        C. x²/4 + y²/9 = 1
+
+                    <button type="button" class="quiz-option" data-answer="c" aria-pressed="false">
+                        C. \(\frac{x^2}{4}+\frac{y^2}{9}=1\)
                     </button>
-                    <button class="quiz-option" data-answer="d">
-                        D. y = x²
+
+                    <button type="button" class="quiz-option" data-answer="d" aria-pressed="false">
+                        D. \(y=x^2\)
                     </button>
                 </div>
 
@@ -193,6 +220,7 @@
                 <button class="btn btn-primary" id="conic-check" type="button">
                     Comprobar respuesta
                 </button>
+
                 <button class="btn btn-secondary" id="conic-reset" type="button">
                     Intentar de nuevo
                 </button>
@@ -203,9 +231,15 @@
             <div>
                 <span class="eyebrow">SIGUIENTE TEMA</span>
                 <h2>Conecta las ecuaciones con la geometría.</h2>
-                <p>Continúa con las superficies cuádricas o repasa los ejemplos antes de avanzar.</p>
+                <p>
+                    Continúa con las superficies cuádricas o repasa los
+                    ejemplos antes de avanzar.
+                </p>
             </div>
-            <a href="cuadricas.html" class="btn btn-primary">Repasar cuádricas</a>
+
+            <a href="cuadricas.html" class="btn btn-primary">
+                Repasar cuádricas
+            </a>
         </section>
     </main>
 
@@ -218,6 +252,109 @@
         <span>Proyecto académico · 2026</span>
     </footer>
 
-    <script src="js/conicas.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const quiz = document.getElementById('conic-quiz');
+
+            if (!quiz) return;
+
+            const opciones = quiz.querySelectorAll('.quiz-option');
+            const comprobar = document.getElementById('conic-check');
+            const reiniciar = document.getElementById('conic-reset');
+            const feedback = document.getElementById('conic-feedback');
+
+            let seleccionada = null;
+            let respondida = false;
+
+            opciones.forEach(function (opcion) {
+                opcion.addEventListener('click', function () {
+                    if (respondida) return;
+
+                    seleccionada = opcion.dataset.answer;
+
+                    opciones.forEach(function (otra) {
+                        otra.classList.remove('selected', 'correct', 'incorrect');
+                        otra.setAttribute('aria-pressed', 'false');
+                    });
+
+                    opcion.classList.add('selected');
+                    opcion.setAttribute('aria-pressed', 'true');
+
+                    feedback.textContent = 'Respuesta seleccionada. Pulsa "Comprobar respuesta".';
+                });
+            });
+
+            comprobar.addEventListener('click', function () {
+                if (respondida) return;
+
+                if (!seleccionada) {
+                    feedback.textContent = 'Primero debes seleccionar una respuesta.';
+                    return;
+                }
+
+                respondida = true;
+
+                const correcta = seleccionada === 'b';
+
+                opciones.forEach(function (opcion) {
+                    opcion.disabled = true;
+
+                    if (opcion.dataset.answer === 'b') {
+                        opcion.classList.add('correct');
+                    } else if (opcion.dataset.answer === seleccionada && !correcta) {
+                        opcion.classList.add('incorrect');
+                    }
+                });
+
+                if (correcta) {
+                    feedback.textContent =
+                        '¡Correcto! Los términos cuadrados tienen signos opuestos, por eso representa una hipérbola.';
+                } else {
+                    feedback.textContent =
+                        'No es correcto. Recuerda: una hipérbola tiene términos cuadrados con signos opuestos. La respuesta correcta es la B.';
+                }
+
+                guardarProgreso(correcta);
+            });
+
+            reiniciar.addEventListener('click', function () {
+                seleccionada = null;
+                respondida = false;
+
+                opciones.forEach(function (opcion) {
+                    opcion.disabled = false;
+                    opcion.classList.remove('selected', 'correct', 'incorrect');
+                    opcion.setAttribute('aria-pressed', 'false');
+                });
+
+                feedback.textContent = 'Selecciona una respuesta.';
+            });
+
+            function guardarProgreso(correcta) {
+                try {
+                    const clave = 'vectorizaProgress';
+                    let datos = JSON.parse(localStorage.getItem(clave)) || {};
+
+                    if (!Array.isArray(datos.completedLessons)) {
+                        datos.completedLessons = [];
+                    }
+
+                    datos.attempts = (Number(datos.attempts) || 0) + 1;
+
+                    if (correcta) {
+                        datos.correctAnswers = (Number(datos.correctAnswers) || 0) + 1;
+
+                        if (!datos.completedLessons.includes('conicas')) {
+                            datos.completedLessons.push('conicas');
+                        }
+                    }
+
+                    localStorage.setItem(clave, JSON.stringify(datos));
+                } catch (error) {
+                    console.warn('No se pudo guardar el progreso:', error);
+                }
+            }
+        });
+    </script>
 </body>
 </html>

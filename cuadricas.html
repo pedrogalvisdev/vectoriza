@@ -1,19 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="Aprende a identificar superficies cuádricas con ejemplos y ejercicios interactivos.">
+
     <title>Superficies cuádricas | Vectoriza</title>
+
     <link rel="stylesheet" href="css/styles.css">
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$','$']],
+                displayMath: [['\\[', '\\]']]
+            }
+        };
+    </script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script src="js/script.js" defer></script>
 </head>
+
 <body>
     <header class="navbar">
         <a href="index.html" class="logo">
             <span class="logo-icon">V</span>
             <span>Vectoriza</span>
         </a>
+
         <nav class="nav-links">
             <a href="index.html">Inicio</a>
             <a href="#teoria" class="active">Aprender</a>
@@ -26,11 +43,14 @@
 
         <section class="lesson-hero" id="teoria">
             <span class="eyebrow">MÓDULO 01 · GEOMETRÍA EN EL ESPACIO</span>
+
             <h1>Superficies <span>cuádricas</span></h1>
+
             <p>
                 Aprende a reconocer superficies en tres dimensiones,
                 transformar sus ecuaciones y comprender sus características.
             </p>
+
             <div class="lesson-tags">
                 <span>Conceptos básicos</span>
                 <span>Ejemplos resueltos</span>
@@ -41,20 +61,29 @@
         <section class="lesson-block">
             <div class="lesson-heading">
                 <span class="lesson-number">01</span>
+
                 <div>
                     <h2>¿Qué es una superficie cuádrica?</h2>
                     <p>Primero, comprendamos la idea.</p>
                 </div>
             </div>
+
             <p>
                 Una superficie cuádrica es una superficie en el espacio
                 tridimensional cuya ecuación contiene términos de segundo
                 grado, como x², y² o z². Su forma depende de los coeficientes,
                 los signos y la manera en que aparecen las variables.
             </p>
+
             <div class="formula-card">
                 <span>Forma general</span>
-                <div class="formula">Ax² + By² + Cz² + Dx + Ey + Fz + G = 0</div>
+
+                <div class="formula">
+                    \[
+                    Ax^2+By^2+Cz^2+Dx+Ey+Fz+G=0
+                    \]
+                </div>
+
                 <p>Esta expresión puede representar diferentes superficies.</p>
             </div>
         </section>
@@ -62,6 +91,7 @@
         <section class="lesson-block">
             <div class="lesson-heading">
                 <span class="lesson-number">02</span>
+
                 <div>
                     <h2>Ejemplo resuelto</h2>
                     <p>Transformemos la ecuación paso a paso.</p>
@@ -70,38 +100,58 @@
 
             <div class="worked-example">
                 <span class="step-label">EJERCICIO</span>
+
                 <h3>Identifica la superficie</h3>
-                <div class="formula">x² + 4y² + 9z² = 36</div>
+
+                <div class="formula">
+                    \[
+                    x^2+4y^2+9z^2=36
+                    \]
+                </div>
 
                 <div class="solution-step">
                     <span class="step-index">1</span>
+
                     <div>
                         <h4>Dividimos toda la ecuación entre 36</h4>
+
                         <p>Buscamos que el lado derecho sea igual a 1.</p>
+
                         <div class="formula formula-small">
-                            x²/36 + 4y²/36 + 9z²/36 = 1
+                            \[
+                            \frac{x^2}{36}+\frac{4y^2}{36}
+                            +\frac{9z^2}{36}=1
+                            \]
                         </div>
                     </div>
                 </div>
 
                 <div class="solution-step">
                     <span class="step-index">2</span>
+
                     <div>
                         <h4>Simplificamos cada término</h4>
+
                         <div class="formula formula-small">
-                            x²/36 + y²/9 + z²/4 = 1
+                            \[
+                            \frac{x^2}{36}+\frac{y^2}{9}
+                            +\frac{z^2}{4}=1
+                            \]
                         </div>
                     </div>
                 </div>
 
                 <div class="solution-step">
                     <span class="step-index">3</span>
+
                     <div>
                         <h4>Comparamos con la forma canónica</h4>
+
                         <p>
                             Los tres términos cuadrados son positivos,
-                            tienen denominadores positivos y la suma es 1.
+                            tienen denominadores positivos y su suma es 1.
                         </p>
+
                         <div class="answer-note">
                             <strong>Conclusión:</strong> es un elipsoide
                             centrado en el origen.
@@ -114,6 +164,7 @@
         <section class="lesson-block" id="practica">
             <div class="lesson-heading">
                 <span class="lesson-number">03</span>
+
                 <div>
                     <h2>Comprueba lo aprendido</h2>
                     <p>Selecciona una respuesta y revisa tu resultado.</p>
@@ -122,31 +173,46 @@
 
             <div class="quiz-card" id="quiz">
                 <span class="step-label">PREGUNTA 01</span>
+
                 <h3>¿Qué superficie representa esta ecuación?</h3>
-                <div class="formula">x²/4 + y²/9 + z²/16 = 1</div>
+
+                <div class="formula">
+                    \[
+                    \frac{x^2}{4}+\frac{y^2}{9}+\frac{z^2}{16}=1
+                    \]
+                </div>
 
                 <div class="quiz-options">
-                    <button class="quiz-option" data-answer="a">
+                    <button type="button" class="quiz-option" data-answer="a">
                         A. Un paraboloide elíptico
                     </button>
-                    <button class="quiz-option" data-answer="b">
+
+                    <button type="button" class="quiz-option" data-answer="b">
                         B. Un elipsoide
                     </button>
-                    <button class="quiz-option" data-answer="c">
+
+                    <button type="button" class="quiz-option" data-answer="c">
                         C. Un hiperboloide de una hoja
                     </button>
-                    <button class="quiz-option" data-answer="d">
+
+                    <button type="button" class="quiz-option" data-answer="d">
                         D. Un cilindro circular
                     </button>
                 </div>
 
-                <div class="quiz-feedback" id="quiz-feedback" aria-live="polite">
-                    Elige una opción para comprobar tu respuesta.
+                <div
+                    class="quiz-feedback"
+                    id="quiz-feedback"
+                    role="status"
+                    aria-live="polite"
+                >
+                    Selecciona una opción y pulsa «Comprobar respuesta».
                 </div>
 
                 <button class="btn btn-primary" id="check-answer" type="button">
                     Comprobar respuesta
                 </button>
+
                 <button class="btn btn-secondary" id="reset-quiz" type="button">
                     Intentar de nuevo
                 </button>
@@ -156,10 +222,18 @@
         <section class="lesson-finish">
             <div>
                 <span class="eyebrow">SIGUIENTE PASO</span>
+
                 <h2>¡Vas construyendo tus bases!</h2>
-                <p>Cuando domines este concepto, podrás estudiar otras superficies y sus características.</p>
+
+                <p>
+                    Cuando domines este concepto, podrás estudiar otras
+                    superficies y sus características.
+                </p>
             </div>
-            <a href="index.html" class="btn btn-primary">Volver al inicio</a>
+
+            <a href="index.html" class="btn btn-primary">
+                Volver al inicio
+            </a>
         </section>
     </main>
 
@@ -168,8 +242,124 @@
             <span class="logo-icon">V</span>
             <span>Vectoriza</span>
         </a>
+
         <p>Aprende a tu ritmo.</p>
         <span>Proyecto académico · 2026</span>
     </footer>
+
+    <!-- Funcionamiento independiente del cuestionario -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const quiz = document.getElementById("quiz");
+            const opciones = quiz.querySelectorAll(".quiz-option");
+            const botonComprobar = document.getElementById("check-answer");
+            const botonReiniciar = document.getElementById("reset-quiz");
+            const feedback = document.getElementById("quiz-feedback");
+
+            let seleccionada = null;
+            let respondido = false;
+
+            opciones.forEach(function (opcion) {
+                opcion.setAttribute("aria-pressed", "false");
+
+                opcion.addEventListener("click", function () {
+                    if (respondido) return;
+
+                    seleccionada = opcion.dataset.answer;
+
+                    opciones.forEach(function (otra) {
+                        otra.classList.remove("selected");
+                        otra.setAttribute("aria-pressed", "false");
+                    });
+
+                    opcion.classList.add("selected");
+                    opcion.setAttribute("aria-pressed", "true");
+
+                    feedback.textContent =
+                        "Respuesta seleccionada. Pulsa «Comprobar respuesta» para revisar.";
+                });
+            });
+
+            botonComprobar.addEventListener("click", function () {
+                if (!seleccionada) {
+                    feedback.textContent =
+                        "Primero selecciona una de las cuatro respuestas.";
+                    return;
+                }
+
+                if (respondido) return;
+
+                respondido = true;
+
+                const correcta = seleccionada === "b";
+
+                if (correcta) {
+                    feedback.textContent =
+                        "¡Correcto! Es un elipsoide porque los tres términos cuadrados son positivos y su suma es igual a 1.";
+                    feedback.classList.add("correct");
+                } else {
+                    feedback.textContent =
+                        "No es correcto. Recuerda: la suma de tres términos cuadrados positivos, igual a 1, representa un elipsoide.";
+                    feedback.classList.add("incorrect");
+                }
+
+                opciones.forEach(function (opcion) {
+                    opcion.disabled = true;
+
+                    if (opcion.dataset.answer === "b") {
+                        opcion.classList.add("correct");
+                    } else if (opcion.dataset.answer === seleccionada) {
+                        opcion.classList.add("incorrect");
+                    }
+                });
+
+                // Guardar estadísticas para la página de progreso.
+                try {
+                    const clave = "vectorizaProgress";
+                    const datos = JSON.parse(localStorage.getItem(clave)) || {
+                        attempts: 0,
+                        correctAnswers: 0,
+                        completedLessons: []
+                    };
+
+                    datos.attempts = Number(datos.attempts) || 0;
+                    datos.correctAnswers = Number(datos.correctAnswers) || 0;
+
+                    datos.attempts++;
+
+                    if (correcta) {
+                        datos.correctAnswers++;
+                        if (!datos.completedLessons.includes("cuadricas")) {
+                            datos.completedLessons.push("cuadricas");
+                        }
+                    }
+
+                    localStorage.setItem(clave, JSON.stringify(datos));
+                } catch (error) {
+                    console.warn("No se pudo guardar el progreso.", error);
+                }
+            });
+
+            botonReiniciar.addEventListener("click", function () {
+                seleccionada = null;
+                respondido = false;
+
+                opciones.forEach(function (opcion) {
+                    opcion.disabled = false;
+                    opcion.classList.remove(
+                        "selected",
+                        "correct",
+                        "incorrect"
+                    );
+                    opcion.setAttribute("aria-pressed", "false");
+                });
+
+                feedback.textContent =
+                    "Selecciona una opción y pulsa «Comprobar respuesta».";
+
+                feedback.classList.remove("correct", "incorrect");
+            });
+        });
+    </script>
 </body>
 </html>

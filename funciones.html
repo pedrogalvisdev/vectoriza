@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Aprende funciones de varias variables, evaluación de funciones y dominios paso a paso con Vectoriza.">
+
+    <title>Funciones de varias variables | Vectoriza</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Configuración de las fórmulas matemáticas -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: [
+                    'script', 'noscript', 'style',
+                    'textarea', 'pre', 'code'
+                ]
+            }
+        };
+    </script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <script src="js/script.js" defer></script>
+    <script src="js/funciones.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navegación principal -->
+    <header class="navbar">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">V</span>
+            <span>Vectoriza</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="funciones.html" class="active">Funciones</a>
+            <a href="cuadricas.html">Cuádricas</a>
+            <a href="conicas.html">Cónicas</a>
+            <a href="curvas.html">Curvas de nivel</a>
+            <a href="progreso.html">Mi progreso</a>
+        </nav>
+    </header>
+
+    <main class="lesson-container">
+
+        <!-- Presentación del tema -->
+        <section class="lesson-hero">
+            <p class="eyebrow">UNIDAD 1 · FUNDAMENTOS</p>
+
+            <h1>Funciones de varias variables</h1>
+
+            <p>
+                Aprende qué son las funciones multivariables,
+                cómo evaluar sus expresiones y cómo encontrar
+                su dominio paso a paso.
+            </p>
+
+            <a href="#contenido" class="btn btn-primary">
+                Comenzar a aprender
+            </a>
+        </section>
+
+        <div id="contenido">
+
+            <!-- Concepto principal -->
+            <section class="lesson-section">
+                <h2>1. ¿Qué es una función de varias variables?</h2>
+
+                <p>
+                    Una función de varias variables relaciona dos o más
+                    valores de entrada con un único resultado. En cálculo
+                    vectorial trabajamos frecuentemente con funciones
+                    de dos y tres variables.
+                </p>
+
+                <div class="concept-grid">
+                    <article class="concept-card">
+                        <h3>Dos variables</h3>
+
+                        <div class="formula-box">
+                            \[
+                                z=f(x,y)
+                            \]
+                        </div>
+
+                        <p>
+                            Las variables \(x\) y \(y\) son las entradas,
+                            mientras que \(z\) es el resultado.
+                        </p>
+                    </article>
+
+                    <article class="concept-card">
+                        <h3>Tres variables</h3>
+
+                        <div class="formula-box">
+                            \[
+                                w=f(x,y,z)
+                            \]
+                        </div>
+
+                        <p>
+                            La función recibe tres valores y produce
+                            un único resultado.
+                        </p>
+                    </article>
+                </div>
+
+                <div class="example-card">
+                    <h3>Ejemplo sencillo</h3>
+
+                    <p>Consideremos la función:</p>
+
+                    <div class="formula-box">
+                        \[
+                            f(x,y)=x^2+y^2
+                        \]
+                    </div>
+
+                    <p>
+                        Si conocemos los valores de \(x\) y \(y\),
+                        podemos reemplazarlos en la expresión para
+                        obtener el resultado de la función.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Evaluación de funciones -->
+            <section class="lesson-section">
+                <h2>2. ¿Cómo evaluar una función?</h2>
+
+                <p>
+                    Evaluar una función consiste en reemplazar sus
+                    variables por los valores indicados y realizar
+                    las operaciones correspondientes.
+                </p>
+
+                <div class="example-card">
+                    <h3>Ejemplo resuelto</h3>
+
+                    <p>Sea la función:</p>
+
+                    <div class="formula-box">
+                        \[
+                            f(x,y)=x^2+2y
+                        \]
+                    </div>
+
+                    <p>Queremos calcular \(f(2,3)\).</p>
+
+                    <p><strong>Paso 1.</strong> Reemplazamos \(x=2\) y \(y=3\).</p>
+
+                    <div class="formula-box">
+                        \[
+                            f(2,3)=2^2+2(3)
+                        \]
+                    </div>
+
+                    <p><strong>Paso 2.</strong> Resolvemos la potencia y la multiplicación.</p>
+
+                    <div class="formula-box">
+                        \[
+                            f(2,3)=4+6
+                        \]
+                    </div>
+
+                    <p><strong>Paso 3.</strong> Sumamos los resultados.</p>
+
+                    <div class="formula-box">
+                        \[
+                            f(2,3)=10
+                        \]
+                    </div>
+
+                    <p><strong>Resultado:</strong> la función vale \(10\) en el punto \((2,3)\).</p>
+                </div>
+            </section>
+
+            <!-- Dominio -->
+            <section class="lesson-section">
+                <h2>3. ¿Qué es el dominio?</h2>
+
+                <p>
+                    El dominio es el conjunto de valores que podemos
+                    introducir en una función sin generar operaciones
+                    matemáticamente inválidas dentro de los números reales.
+                </p>
+
+                <div class="concept-grid">
+                    <article class="concept-card">
+                        <h3>Fracciones</h3>
+
+                        <p>El denominador no puede ser igual a cero.</p>
+
+                        <div class="formula-box">
+                            \[
+                                f(x,y)=\frac{1}{x-y}
+                            \]
+                        </div>
+
+                        <p><strong>Restricción:</strong></p>
+
+                        <div class="formula-box">
+                            \[
+                                x-y\ne 0
+                            \]
+                        </div>
+
+                        <p>Es decir, \(x\ne y\).</p>
+                    </article>
+
+                    <article class="concept-card">
+                        <h3>Raíces pares</h3>
+
+                        <p>El radicando debe ser mayor o igual que cero.</p>
+
+                        <div class="formula-box">
+                            \[
+                                f(x,y)=\sqrt{x+y}
+                            \]
+                        </div>
+
+                        <p><strong>Restricción:</strong></p>
+
+                        <div class="formula-box">
+                            \[
+                                x+y\geq 0
+                            \]
+                        </div>
+                    </article>
+
+                    <article class="concept-card">
+                        <h3>Logaritmos</h3>
+
+                        <p>El argumento debe ser estrictamente positivo.</p>
+
+                        <div class="formula-box">
+                            \[
+                                f(x,y)=\ln(x-y)
+                            \]
+                        </div>
+
+                        <p><strong>Restricción:</strong></p>
+
+                        <div class="formula-box">
+                            \[
+                                x-y>0
+                            \]
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Ejemplo de dominio -->
+            <section class="lesson-section">
+                <h2>4. Ejemplo de dominio paso a paso</h2>
+
+                <div class="example-card">
+                    <p>Encuentra el dominio de la siguiente función:</p>
+
+                    <div class="formula-box">
+                        \[
+                            f(x,y)=\frac{\sqrt{x+y}}{x-1}
+                        \]
+                    </div>
+
+                    <h3>Paso 1. Restricción de la raíz</h3>
+
+                    <p>
+                        Como tenemos una raíz cuadrada, la expresión
+                        que está dentro de ella debe ser mayor o igual
+                        que cero.
+                    </p>
+
+                    <div class="formula-box">
+                        \[
+                            x+y\geq 0
+                        \]
+
+                        \[
+                            y\geq -x
+                        \]
+                    </div>
+
+                    <h3>Paso 2. Restricción del denominador</h3>
+
+                    <p>
+                        El denominador no puede ser cero, por lo tanto:
+                    </p>
+
+                    <div class="formula-box">
+                        \[
+                            x-1\ne 0
+                        \]
+
+                        \[
+                            x\ne 1
+                        \]
+                    </div>
+
+                    <h3>Paso 3. Unir las restricciones</h3>
+
+                    <p>
+                        El dominio contiene todos los puntos \((x,y)\)
+                        que cumplen simultáneamente las dos condiciones:
+                    </p>
+
+                    <div class="formula-box">
+                        \[
+                            x+y\geq 0
+                            \qquad \text{y} \qquad
+                            x\ne 1
+                        \]
+                    </div>
+
+                    <p>
+                        Recuerda que ambas condiciones deben cumplirse
+                        al mismo tiempo.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Cuestionario -->
+            <section class="lesson-section">
+                <h2>5. Practica lo aprendido</h2>
+
+                <div class="quiz-card">
+                    <form id="functions-quiz">
+                        <fieldset>
+                            <legend>
+                                <strong>Pregunta 1.</strong>
+                                ¿Cuál es la restricción de dominio para
+                                la función siguiente?
+                            </legend>
+
+                            <div class="formula-box">
+                                \[
+                                    f(x,y)=\ln(x+y)
+                                \]
+                            </div>
+
+                            <div class="quiz-options">
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="answer"
+                                        value="a"
+                                        required
+                                    >
+                                    <span>\(x+y\geq 0\)</span>
+                                </label>
+
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="answer"
+                                        value="b"
+                                    >
+                                    <span>\(x+y>0\)</span>
+                                </label>
+
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="answer"
+                                        value="c"
+                                    >
+                                    <span>\(x+y\ne 0\)</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <div class="quiz-actions">
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                id="check-answer"
+                            >
+                                Comprobar respuesta
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-action="reset"
+                            >
+                                Reiniciar
+                            </button>
+                        </div>
+
+                        <p
+                            id="feedback"
+                            class="quiz-feedback"
+                            role="status"
+                            aria-live="polite"
+                            hidden
+                        ></p>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Siguiente tema -->
+        <section class="lesson-section lesson-navigation">
+            <h2>¿Qué sigue?</h2>
+
+            <p>
+                Cuando domines las funciones y sus dominios,
+                podrás avanzar hacia el estudio de las superficies
+                cuádricas y las demás unidades de cálculo vectorial.
+            </p>
+
+            <a href="cuadricas.html" class="btn btn-primary">
+                Continuar con cuádricas →
+            </a>
+
+            <a href="index.html" class="btn btn-secondary">
+                Volver al inicio
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>Vectoriza · Aprende Cálculo Vectorial paso a paso</p>
+    </footer>
+
+</body>
+</html>

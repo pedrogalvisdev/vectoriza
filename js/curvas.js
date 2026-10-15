@@ -1,231 +1,82 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-    configurarCuestionarioCurvas();
     configurarGraficaCurvas();
 });
 
 /* =========================================
-   1. PROGRESO DEL CUESTIONARIO
-========================================= */
-
-const CLAVE_PROGRESO_CURVAS = "vectorizaCurvasProgress";
-
-function obtenerProgresoCurvas() {
-    try {
-        const datos = localStorage.getItem(CLAVE_PROGRESO_CURVAS);
-        const progreso = datos ? JSON.parse(datos) : {};
-
-        return {
-            attempts: Number(progreso.attempts) || 0,
-            correctAnswers: Number(progreso.correctAnswers) || 0
-        };
-    } catch (error) {
-        console.error("Error al leer el progreso de curvas:", error);
-
-        return {
-            attempts: 0,
-            correctAnswers: 0
-        };
-    }
-}
-
-function guardarProgresoCurvas(esCorrecta) {
-    try {
-        const progreso = obtenerProgresoCurvas();
-
-        progreso.attempts += 1;
-
-        if (esCorrecta) {
-            progreso.correctAnswers += 1;
-        }
-
-        localStorage.setItem(
-            CLAVE_PROGRESO_CURVAS,
-            JSON.stringify(progreso)
-        );
-    } catch (error) {
-        console.error("Error al guardar el progreso de curvas:", error);
-    }
-}
-
-/* =========================================
-   2. CUESTIONARIO DE CURVAS DE NIVEL
-========================================= */
-
-function configurarCuestionarioCurvas() {
-    const formulario = document.getElementById("level-quiz");
-
-    if (!formulario) {
-        return;
-    }
-
-    const respuestaCorrecta = "b";
-
-    const feedback = formulario.querySelector(
-        "#feedback, .quiz-feedback, .feedback"
-    );
-
-    const botonComprobar = formulario.querySelector(
-        'button[type="submit"], input[type="submit"]'
-    );
-
-    const botonReiniciar = formulario.querySelector(
-        '[data-action="reset"], .reset-btn, .quiz-reset'
-    );
-
-    let respondido = false;
-
-    formulario.addEventListener("submit", (evento) => {
-        evento.preventDefault();
-
-        if (respondido) {
-            return;
-        }
-
-        const seleccionada = formulario.querySelector(
-            'input[name="answer"]:checked, ' +
-            'input[name="respuesta"]:checked, ' +
-            'input[name="quiz"]:checked'
-        );
-
-        if (!seleccionada) {
-            if (feedback) {
-                feedback.textContent =
-                    "Selecciona una respuesta antes de comprobar.";
-                feedback.className = "quiz-feedback incorrect";
-                feedback.setAttribute("role", "alert");
-            }
-
-            return;
-        }
-
-        const esCorrecta =
-            seleccionada.value.trim().toLowerCase() === respuestaCorrecta;
-
-        guardarProgresoCurvas(esCorrecta);
-        respondido = true;
-
-        if (feedback) {
-            feedback.textContent = esCorrecta
-                ? "¡Correcto! Comprendiste la idea de una curva de nivel."
-                : "Respuesta incorrecta. Recuerda que una curva de nivel representa f(x, y) = k.";
-
-            feedback.className = esCorrecta
-                ? "quiz-feedback correct"
-                : "quiz-feedback incorrect";
-
-            feedback.setAttribute("role", "status");
-        }
-
-        formulario.querySelectorAll('input[type="radio"]').forEach((opcion) => {
-            opcion.disabled = true;
-        });
-
-        if (botonComprobar) {
-            botonComprobar.disabled = true;
-        }
-
-        if (botonReiniciar) {
-            botonReiniciar.hidden = false;
-        }
-    });
-
-    if (botonReiniciar) {
-        botonReiniciar.addEventListener("click", () => {
-            formulario.reset();
-
-            formulario.querySelectorAll('input[type="radio"]').forEach((opcion) => {
-                opcion.disabled = false;
-            });
-
-            if (feedback) {
-                feedback.textContent = "";
-                feedback.className = "quiz-feedback";
-                feedback.removeAttribute("role");
-            }
-
-            if (botonComprobar) {
-                botonComprobar.disabled = false;
-            }
-
-            respondido = false;
-        });
-    }
-}
-
-/* =========================================
-   3. GRÁFICA INTERACTIVA
-   Función: x² + y² = k
+   GRÁFICA INTERACTIVA DE CURVAS DE NIVEL
+   Función: f(x,y) = x² + y²
+   Curva de nivel: x² + y² = k
 ========================================= */
 
 function configurarGraficaCurvas() {
-    const canvas = document.getElementById("level-canvas");
-    const deslizador = document.getElementById("k-slider");
-    const valorK = document.getElementById("k-value");
-    const radioTexto = document.getElementById("radius-value");
+    const canvas = document.getElementById("level-graph");
+    const deslizador = document.getElementById("level-k");
+    const valorK = document.getElementById("level-k-value");
+    const informacion = document.getElementById("level-graph-info");
 
     if (!canvas || !deslizador) {
+        console.error("No se encontraron los elementos de la gráfica.");
         return;
     }
 
     const contexto = canvas.getContext("2d");
 
     if (!contexto) {
-        console.error("No se pudo inicializar la gráfica de curvas de nivel.");
+        console.error("No se pudo inicializar la gráfica.");
         return;
-    }
-
-    function ajustarCanvas() {
-        const rectangulo = canvas.getBoundingClientRect();
-        const proporcion = window.devicePixelRatio || 1;
-
-        const ancho = Math.max(1, Math.round(rectangulo.width * proporcion));
-        const alto = Math.max(1, Math.round(rectangulo.height * proporcion));
-
-        if (canvas.width !== ancho || canvas.height !== alto) {
-            canvas.width = ancho;
-            canvas.height = alto;
-        }
-
-        contexto.setTransform(proporcion, 0, 0, proporcion, 0, 0);
-
-        dibujarGrafica();
     }
 
     function dibujarGrafica() {
         const ancho = canvas.clientWidth;
         const alto = canvas.clientHeight;
 
-        if (!ancho || !alto) {
+        if (ancho <= 0 || alto <= 0) {
             return;
         }
 
-        const k = Math.max(0, Number(deslizador.value) || 0);
+        const proporcion = window.devicePixelRatio || 1;
+
+        const anchoReal = Math.round(ancho * proporcion);
+        const altoReal = Math.round(alto * proporcion);
+
+        if (
+            canvas.width !== anchoReal ||
+            canvas.height !== altoReal
+        ) {
+            canvas.width = anchoReal;
+            canvas.height = altoReal;
+        }
+
+        contexto.setTransform(proporcion, 0, 0, proporcion, 0, 0);
+
+        const k = Math.max(1, Number(deslizador.value) || 1);
         const radio = Math.sqrt(k);
 
-        const escala = Math.min(ancho, alto) / 12;
-        const centroX = ancho / 2;
-        const centroY = alto / 2;
-
+        // Fondo de la gráfica
         contexto.clearRect(0, 0, ancho, alto);
-
-        // Fondo
         contexto.fillStyle = "#ffffff";
         contexto.fillRect(0, 0, ancho, alto);
+
+        // Centro y escala para que la circunferencia quepa
+        const centroX = ancho / 2;
+        const centroY = alto / 2;
+        const escala = Math.min(ancho, alto) / 12;
 
         // Cuadrícula
         contexto.beginPath();
         contexto.strokeStyle = "#e3e8f1";
         contexto.lineWidth = 1;
 
-        for (let x = centroX % escala; x < ancho; x += escala) {
-            contexto.moveTo(x, 0);
-            contexto.lineTo(x, alto);
-        }
+        for (let i = -5; i <= 5; i++) {
+            const posicionX = centroX + i * escala;
+            const posicionY = centroY + i * escala;
 
-        for (let y = centroY % escala; y < alto; y += escala) {
-            contexto.moveTo(0, y);
-            contexto.lineTo(ancho, y);
+            contexto.moveTo(posicionX, 0);
+            contexto.lineTo(posicionX, alto);
+
+            contexto.moveTo(0, posicionY);
+            contexto.lineTo(ancho, posicionY);
         }
 
         contexto.stroke();
@@ -243,13 +94,46 @@ function configurarGraficaCurvas() {
 
         contexto.stroke();
 
-        // Etiquetas de los ejes
+        // Números de los ejes
         contexto.fillStyle = "#153866";
         contexto.font = "12px Arial";
-        contexto.fillText("x", ancho - 16, centroY - 8);
-        contexto.fillText("y", centroX + 8, 14);
+        contexto.textAlign = "center";
+        contexto.textBaseline = "top";
 
-        // Curva de nivel: circunferencia de radio √k
+        for (let i = -5; i <= 5; i++) {
+            if (i === 0) continue;
+
+            contexto.fillText(
+                String(i),
+                centroX + i * escala,
+                centroY + 7
+            );
+        }
+
+        contexto.textAlign = "left";
+        contexto.textBaseline = "middle";
+
+        for (let i = -5; i <= 5; i++) {
+            if (i === 0) continue;
+
+            contexto.fillText(
+                String(i),
+                centroX + 7,
+                centroY - i * escala
+            );
+        }
+
+        // Etiquetas de los ejes
+        contexto.font = "bold 14px Arial";
+        contexto.textAlign = "right";
+        contexto.textBaseline = "bottom";
+        contexto.fillText("x", ancho - 8, centroY - 7);
+
+        contexto.textAlign = "left";
+        contexto.textBaseline = "top";
+        contexto.fillText("y", centroX + 8, 5);
+
+        // Circunferencia: x² + y² = k
         contexto.beginPath();
         contexto.arc(
             centroX,
@@ -264,67 +148,81 @@ function configurarGraficaCurvas() {
         contexto.stroke();
 
         // Radio desde el origen hasta la circunferencia
-        if (radio > 0) {
-            contexto.beginPath();
-            contexto.moveTo(centroX, centroY);
-            contexto.lineTo(
-                centroX + radio * escala,
-                centroY
-            );
-
-            contexto.strokeStyle = "#2b6cb0";
-            contexto.lineWidth = 2;
-            contexto.stroke();
-
-            contexto.beginPath();
-            contexto.arc(
-                centroX + radio * escala,
-                centroY,
-                4,
-                0,
-                Math.PI * 2
-            );
-
-            contexto.fillStyle = "#2b6cb0";
-            contexto.fill();
-        }
-
-        // Punto central
         contexto.beginPath();
-        contexto.arc(centroX, centroY, 3, 0, Math.PI * 2);
+        contexto.moveTo(centroX, centroY);
+        contexto.lineTo(
+            centroX + radio * escala,
+            centroY
+        );
+
+        contexto.strokeStyle = "#2b6cb0";
+        contexto.lineWidth = 2;
+        contexto.stroke();
+
+        // Punto final del radio
+        contexto.beginPath();
+        contexto.arc(
+            centroX + radio * escala,
+            centroY,
+            4,
+            0,
+            Math.PI * 2
+        );
+
+        contexto.fillStyle = "#2b6cb0";
+        contexto.fill();
+
+        // Centro de la circunferencia
+        contexto.beginPath();
+        contexto.arc(
+            centroX,
+            centroY,
+            4,
+            0,
+            Math.PI * 2
+        );
+
         contexto.fillStyle = "#153866";
         contexto.fill();
 
-        // Información del nivel
+        // Valor de k dentro de la gráfica
         contexto.fillStyle = "#122459";
         contexto.font = "bold 14px Arial";
-        contexto.fillText(`k = ${k}`, 12, 22);
-    }
+        contexto.textAlign = "left";
+        contexto.textBaseline = "top";
+        contexto.fillText(`k = ${k}`, 12, 12);
 
-    function actualizarValores() {
-        const k = Number(deslizador.value);
-        const radio = Math.sqrt(k);
+        // Actualizar la información debajo de la gráfica
+        if (informacion) {
+            const radioTexto = Number.isInteger(radio)
+                ? String(radio)
+                : radio.toFixed(2);
 
+            informacion.textContent =
+                `Para k = ${k}, el radio es r = √${k} ≈ ${radioTexto}.`;
+        }
+
+        // Actualizar el indicador del deslizador
         if (valorK) {
-            valorK.textContent = String(k);
+            valorK.textContent = `k = ${k}`;
         }
-
-        if (radioTexto) {
-            radioTexto.textContent = radio.toFixed(2);
-        }
-
-        dibujarGrafica();
     }
 
-    deslizador.addEventListener("input", actualizarValores);
+    // Dibujar al mover el deslizador
+    deslizador.addEventListener("input", dibujarGrafica);
+    deslizador.addEventListener("change", dibujarGrafica);
 
+    // Redibujar cuando cambie el tamaño del área
     if ("ResizeObserver" in window) {
-        const observador = new ResizeObserver(ajustarCanvas);
+        const observador = new ResizeObserver(() => {
+            dibujarGrafica();
+        });
+
         observador.observe(canvas);
     } else {
-        window.addEventListener("resize", ajustarCanvas);
+        window.addEventListener("resize", dibujarGrafica);
     }
 
-    actualizarValores();
-    ajustarCanvas();
+    // Dibujar la gráfica inicial
+    dibujarGrafica();
 }
